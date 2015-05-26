@@ -46,10 +46,10 @@ This will insert an image in your article like this:
 
 ![figure](hello-world.png)
 
-The block must start with `..graphviz` (although this is configurable, see
-below).  The word `dot` in the first line indicates the program that will
-be run for producing the image.  The available programs are `dot`, `neato`,
-`twopi`, `circo`, `fdp`, `sfdp`, and `patchwork`.  (see the Graphviz
+The block must start with `..graphviz` (this is configurable, see below).
+The word `dot` in the first line indicates the program that will be run for
+producing the image.  The available programs are `dot`, `neato`, `twopi`,
+`circo`, `fdp`, `sfdp`, and `patchwork`.  (see the Graphviz
 [documentation](http://www.graphviz.org/Documentation.php) for details).
 The Graphviz code must start in the second line of the block.  Notice that
 __newlines are not allowed inside the Graphviz block__.
@@ -58,8 +58,8 @@ __newlines are not allowed inside the Graphviz block__.
 ## Styling with CSS
 
 The image is generated in HTML with an `<img>` element inside a `<div>`
-element.  The latter has class `graphviz` (although this is configurable,
-see below).  A possible CSS styling would be:
+element.  The latter has class `graphviz` (this is configurable, see
+below).  A possible CSS styling would be:
 
 ```css
 div.graphviz  {
