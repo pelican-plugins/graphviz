@@ -20,7 +20,7 @@ You might install this plugin directly from Github along with your website
 sources.  At the top-level directory, do, for instance:
 
     mkdir plugins-extra 
-    git clone https://github.com/rlaboiss/pelican-md-graphviz.git plugins-extra/graphviz
+    git clone https://github.com/rlaboiss/pelican_md_graphviz.git plugins-extra/graphviz
 
 In `pelicanconf.py`, add `'plugins-extra'` to `PLUGIN_PATHS` and
 `'graphviz'` to `PLUGINS` (see the Pelican
