@@ -129,7 +129,7 @@ class GraphvizProcessor (BlockProcessor):
         div.set ('class', self.config ['image-class'])
         img = etree.SubElement (div, 'img')
         img.set ('src', 'data:image/svg+xml;base64,%s'
-                        % base64.b64encode (output))
+                        % base64.b64encode (output).decode ('ascii'))
 
 
 class GraphvizExtension (Extension):
