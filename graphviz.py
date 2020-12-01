@@ -35,7 +35,10 @@ def initialize (pelicanobj):
               'image-class':
                   pelicanobj.settings.get ('MD_GRAPHVIZ_IMAGE_CLASS')}
 
-    pelicanobj.settings ['MD_EXTENSIONS'].append (GraphvizExtension (config))
+    if isinstance (pelicanobj.settings.get ('MD_EXTENSIONS'), list): # pelican 3.6.3 and earlier
+        pelicanobj.settings ['MD_EXTENSIONS'].append (GraphvizExtension (config))
+    else:
+        pelicanobj.settings ['MARKDOWN'].setdefault ('extensions', []).append (GraphvizExtension (config))
 
 def register ():
     """Register the Markdown Graphviz plugin with Pelican"""
