@@ -83,10 +83,10 @@ div.graphviz img {
 
 The following variables can be set in the Pelican configuration file:
 
-- `MD_GRAPHVIZ_IMAGE_CLASS`: Class of the `<div>` element including the
+- `GRAPHVIZ_IMAGE_CLASS`: Class of the `<div>` element including the
   yielding Graphviz image (defaults to `'graphviz'`).
 
-- `MD_GRAPHVIZ_BLOCK_START`: Starting tag for the Graphviz block in
+- `GRAPHVIZ_BLOCK_START`: Starting tag for the Graphviz block in
   Markdown (defaults to `'..graphviz'`).
 
 
@@ -111,7 +111,7 @@ plugin, which complicates its installation.
 
 ## Author
 
-Copyright (C) 2015  Rafael Laboissiere (<rafael@laboissiere.net>)
+Copyright (C) 2015, 2021  Rafael Laboissiere (<rafael@laboissiere.net>)
 
 Released under the GNU Affero Public License, version 3 or later.  No
 warranties.

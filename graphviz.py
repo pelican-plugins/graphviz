@@ -1,6 +1,6 @@
 """Markdown Graphviz plugin for Pelican"""
 
-## Copyright (C) 2015  Rafael Laboissiere
+## Copyright (C) 2015, 2021  Rafael Laboissiere
 ##
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by the
@@ -27,13 +27,13 @@ from .mdx_graphviz import GraphvizExtension
 
 def initialize (pelicanobj):
     """Initialize the Markdown Graphviz plugin"""
-    pelicanobj.settings.setdefault ('MD_GRAPHVIZ_BLOCK_START', '..graphviz')
-    pelicanobj.settings.setdefault ('MD_GRAPHVIZ_IMAGE_CLASS', 'graphviz')
+    pelicanobj.settings.setdefault ('GRAPHVIZ_BLOCK_START', '..graphviz')
+    pelicanobj.settings.setdefault ('GRAPHVIZ_IMAGE_CLASS', 'graphviz')
 
     config = {'block-start':
-                  pelicanobj.settings.get ('MD_GRAPHVIZ_BLOCK_START'),
+                  pelicanobj.settings.get ('GRAPHVIZ_BLOCK_START'),
               'image-class':
-                  pelicanobj.settings.get ('MD_GRAPHVIZ_IMAGE_CLASS')}
+                  pelicanobj.settings.get ('GRAPHVIZ_IMAGE_CLASS')}
 
     if isinstance (pelicanobj.settings.get ('MD_EXTENSIONS'), list): # pelican 3.6.3 and earlier
         pelicanobj.settings ['MD_EXTENSIONS'].append (GraphvizExtension (config))

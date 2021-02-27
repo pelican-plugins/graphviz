@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Unit testing suite for the Graphviz plugin"""
 
-## Copyright (C) 2015  Rafael Laboissiere <rafael@laboissiere.net>
+## Copyright (C) 2015, 2021  Rafael Laboissiere <rafael@laboissiere.net>
 ##
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Affero Public License as published by
@@ -46,8 +46,8 @@ class TestGraphviz (unittest.TestCase):
             'OUTPUT_PATH': self.output_path,
             'PLUGINS': [graphviz],
             'CACHE_CONTENT': False,
-            'MD_GRAPHVIZ_BLOCK_START': block_start,
-            'MD_GRAPHVIZ_IMAGE_CLASS': image_class
+            'GRAPHVIZ_BLOCK_START': block_start,
+            'GRAPHVIZ_IMAGE_CLASS': image_class
         }
 
         ## Store the image_class in self, since it will be needed in the
@@ -97,24 +97,24 @@ digraph G {
 
 
 class TestGraphvizBlockStart (TestGraphviz):
-    """Class for exercising the configuration variable MD_GRAPHVIZ_BLOCK_START"""
+    """Class for exercising the configuration variable GRAPHVIZ_BLOCK_START"""
 
     def setUp (self):
         """Initialize the configuration"""
         TestGraphviz.setUp (self, block_start = '==foobar')
 
     def test_output (self):
-        """Test for MD_GRAPHVIZ_BLOCK_START setting"""
+        """Test for GRAPHVIZ_BLOCK_START setting"""
         TestGraphviz.test_output (self)
 
 
 class TestGraphvizImageClass (TestGraphviz):
-    """Class for exercising configuration variable MD_GRAPHVIZ_IMAGE_CLASS"""
+    """Class for exercising configuration variable GRAPHVIZ_IMAGE_CLASS"""
 
     def setUp (self):
         """Initialize the configuration"""
         TestGraphviz.setUp (self, image_class = 'foo')
 
     def test_output (self):
-        """Test for MD_GRAPHVIZ_IMAGE_CLASS setting"""
+        """Test for GRAPHVIZ_IMAGE_CLASS setting"""
         TestGraphviz.test_output (self)
