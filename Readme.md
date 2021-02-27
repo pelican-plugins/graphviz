@@ -114,6 +114,13 @@ available at Github.  However, this extension needs a patch to the
 plugin, which complicates its installation.
 
 
+## ToDo
+
+Make this plugin work with
+[reStructuredText](https://docutils.sourceforge.io/rst.html).
+Contributions on this are welcome.
+
+
 ## Author
 
 Copyright (C) 2015, 2021  Rafael Laboissiere (<rafael@laboissiere.net>)
