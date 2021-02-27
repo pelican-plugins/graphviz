@@ -29,11 +29,14 @@ def initialize (pelicanobj):
     """Initialize the Markdown Graphviz plugin"""
     pelicanobj.settings.setdefault ('GRAPHVIZ_BLOCK_START', '..graphviz')
     pelicanobj.settings.setdefault ('GRAPHVIZ_IMAGE_CLASS', 'graphviz')
+    pelicanobj.settings.setdefault ('GRAPHVIZ_HTML_ELEMENT', 'div')
 
     config = {'block-start':
                   pelicanobj.settings.get ('GRAPHVIZ_BLOCK_START'),
               'image-class':
-                  pelicanobj.settings.get ('GRAPHVIZ_IMAGE_CLASS')}
+                  pelicanobj.settings.get ('GRAPHVIZ_IMAGE_CLASS'),
+              'html-element':
+                  pelicanobj.settings.get ('GRAPHVIZ_HTML_ELEMENT')}
 
     if isinstance (pelicanobj.settings.get ('MD_EXTENSIONS'), list): # pelican 3.6.3 and earlier
         pelicanobj.settings ['MD_EXTENSIONS'].append (GraphvizExtension (config))

@@ -1,6 +1,6 @@
 """Markdown extension for the Graphviz plugin for Pelican"""
 
-## Copyright (C) 2015  Rafael Laboissiere
+## Copyright (C) 2015, 2021  Rafael Laboissiere
 ##
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Affero Public License as published by
@@ -125,9 +125,9 @@ class GraphvizProcessor (BlockProcessor):
 
         output = run_graphviz (program, code, format = 'svg')
 
-        div = etree.SubElement (parent, 'div')
-        div.set ('class', self.config ['image-class'])
-        img = etree.SubElement (div, 'img')
+        elt = etree.SubElement (parent, self.config ['html-element'])
+        elt.set ('class', self.config ['image-class'])
+        img = etree.SubElement (elt, 'img')
         img.set ('src', 'data:image/svg+xml;base64,%s'
                         % base64.b64encode (output).decode ('ascii'))
 

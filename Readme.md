@@ -57,8 +57,9 @@ __newlines are not allowed inside the Graphviz block__.
 
 ## Styling with CSS
 
-The image is generated in HTML with an `<img>` element inside a `<div>`
-element.  The latter has class `graphviz` (this is configurable, see
+The image is generated in HTML with an `<img>` element inside an HTML
+element (by default a `<div>`, but this is configurable, see below).
+The latter has class `graphviz` (this is also configurable, see
 below).  A possible CSS styling would be:
 
 ```css
@@ -82,6 +83,10 @@ div.graphviz img {
 ## Configuration
 
 The following variables can be set in the Pelican configuration file:
+
+- `GRAPHVIZ_HTML_ELEMENT`: The HTML inside which the yielding Graphviz
+  image is inserted (defaults to `'div'`; another sensible possibility
+  would be `'span'`).
 
 - `GRAPHVIZ_IMAGE_CLASS`: Class of the `<div>` element including the
   yielding Graphviz image (defaults to `'graphviz'`).
