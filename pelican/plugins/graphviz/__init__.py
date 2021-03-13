@@ -1,1 +1,1 @@
-from .graphviz import *
+from .graphviz import *  # NOQA
