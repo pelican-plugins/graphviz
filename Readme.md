@@ -123,7 +123,7 @@ Contributions on this are welcome.
 
 ## Author
 
-Copyright (C) 2015, 2021  Rafael Laboissiere (<rafael@laboissiere.net>)
+Copyright (C) 2015, 2021  Rafael Laboissière (<rafael@laboissiere.net>)
 
 Released under the GNU Affero Public License, version 3 or later.  No
 warranties.
