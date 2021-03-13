@@ -59,7 +59,7 @@ class TestGraphviz(unittest.TestCase):
         # Create the article file
         fid = open(os.path.join(self.content_path, "%s.md" % TEST_FILE_STEM), "w")
         # Write header
-        fid.write("Title: %s\nDate:\n" % TEST_FILE_STEM)
+        fid.write("Title: %s\nDate: 1970-01-01\n" % TEST_FILE_STEM)
         # Write Graphviz block
         fid.write(
             """
