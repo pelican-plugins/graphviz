@@ -148,6 +148,6 @@ class GraphvizExtension(Extension):
     def extendMarkdown(self, md, md_globals):
         """Add an instance of GraphvizProcessor to BlockParser"""
         md.registerExtension(self)
-        md.parser.blockprocessors.add(
-            "graphviz", GraphvizProcessor(md.parser, self.config), "_begin"
+        md.parser.blockprocessors.register(
+            GraphvizProcessor(md.parser, self.config), "graphviz", 200
         )
