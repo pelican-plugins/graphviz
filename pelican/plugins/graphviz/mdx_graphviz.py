@@ -145,7 +145,7 @@ class GraphvizExtension(Extension):
         """Initialization code for the GraphvizExtension class"""
         self.config = config
 
-    def extendMarkdown(self, md, md_globals):
+    def extendMarkdown(self, md):
         """Add an instance of GraphvizProcessor to BlockParser"""
         md.registerExtension(self)
         md.parser.blockprocessors.register(
