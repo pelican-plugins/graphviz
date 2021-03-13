@@ -1,2 +1,2 @@
-/*.pyc
-/__pycache__/
+/pelican/plugins/graphviz/__pycache__/
+/poetry.lock
