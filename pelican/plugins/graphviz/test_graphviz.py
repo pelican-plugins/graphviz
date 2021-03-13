@@ -29,7 +29,7 @@ from . import graphviz
 TEST_FILE_STEM = "test"
 TEST_DIR_PREFIX = "pelicantests."
 GRAPHVIZ_RE = (
-    r'<div class="%s"><img src="data:image/svg\+xml;base64,[0-9a-zA-Z+/]+" /></div>'
+    r'<div class="%s"><img src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></div>'
 )
 
 
