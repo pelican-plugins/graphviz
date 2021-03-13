@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Unit testing suite for the Graphviz plugin"""
 
 # Copyright (C) 2015, 2021  Rafael Laboissière <rafael@laboissiere.net>
@@ -87,7 +86,7 @@ digraph G {
     def test_output(self):
         """Test for default values of the configuration variables"""
         # Open the output HTML file
-        fid = open(os.path.join(self.output_path, "%s.html" % TEST_FILE_STEM), "r")
+        fid = open(os.path.join(self.output_path, "%s.html" % TEST_FILE_STEM))
         found = False
         # Iterate over the lines and look for the HTML element corresponding
         # to the generated Graphviz figure

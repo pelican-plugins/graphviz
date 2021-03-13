@@ -78,11 +78,11 @@ def run_graphviz(program, code, options=[], format="png"):
         # Graphviz may close standard input when an error occurs,
         # resulting in a broken pipe on communicate()
         stdout, stderr = p.communicate(code.encode("utf-8"))
-    except (OSError, IOError) as err:
+    except OSError as err:
         if err.errno != errno.EPIPE:
             raise
         wentwrong = True
-    except IOError as err:
+    except OSError as err:
         if err.errno != errno.EINVAL:
             raise
         wentwrong = True
@@ -95,7 +95,7 @@ def run_graphviz(program, code, options=[], format="png"):
 
     if p.returncode != 0:
         errmsg = stderr.decode("utf-8")
-        raise RuntimeError("dot exited with error:\n[stderr]\n{0}".format(errmsg))
+        raise RuntimeError(f"dot exited with error:\n[stderr]\n{errmsg}")
 
     return stdout
 
