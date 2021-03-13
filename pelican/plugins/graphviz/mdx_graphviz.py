@@ -50,10 +50,10 @@
 import base64
 import errno
 import re
+import xml.etree.ElementTree as etree
 
 from markdown import Extension
 from markdown.blockprocessors import BlockProcessor
-from markdown.util import etree
 
 
 def run_graphviz(program, code, options=[], format="png"):
