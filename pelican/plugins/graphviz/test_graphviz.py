@@ -29,14 +29,16 @@ from . import graphviz
 TEST_FILE_STEM = "test"
 TEST_DIR_PREFIX = "pelicantests."
 GRAPHVIZ_RE = (
-    r'<div class="%s"><img src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></div>'
+    r'<{0} class="{1}"><img src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
 )
 
 
 class TestGraphviz(unittest.TestCase):
     """Class for testing the URL output of the Graphviz plugin"""
 
-    def setUp(self, block_start="..graphviz", image_class="graphviz"):
+    def setUp(
+        self, block_start="..graphviz", image_class="graphviz", html_element="div"
+    ):
 
         # Set the paths for the input (content) and output (html) files
         self.output_path = mkdtemp(prefix=TEST_DIR_PREFIX)
@@ -48,13 +50,15 @@ class TestGraphviz(unittest.TestCase):
             "OUTPUT_PATH": self.output_path,
             "PLUGINS": [graphviz],
             "CACHE_CONTENT": False,
+            "GRAPHVIZ_HTML_ELEMENT": html_element,
             "GRAPHVIZ_BLOCK_START": block_start,
             "GRAPHVIZ_IMAGE_CLASS": image_class,
         }
 
-        # Store the image_class in self, since it will be needed in the
-        # test_output method defined below
+        # Store the image_class and the html_element in self, since they will be
+        # needed in the test_output method defined below
         self.image_class = image_class
+        self.html_element = html_element
 
         # Create the article file
         fid = open(os.path.join(self.content_path, "%s.md" % TEST_FILE_STEM), "w")
@@ -91,10 +95,22 @@ digraph G {
         # Iterate over the lines and look for the HTML element corresponding
         # to the generated Graphviz figure
         for line in fid.readlines():
-            if re.search(GRAPHVIZ_RE % self.image_class, line):
+            if re.search(GRAPHVIZ_RE.format(self.html_element, self.image_class), line):
                 found = True
                 break
         assert found
+
+
+class TestGraphvizHtmlElement(TestGraphviz):
+    """Class for exercising the configuration variable GRAPHVIZ_HTML_ELEMENT"""
+
+    def setUp(self):
+        """Initialize the configuration"""
+        TestGraphviz.setUp(self, html_element="span")
+
+    def test_output(self):
+        """Test for GRAPHVIZ_HTML_ELEMENT setting"""
+        TestGraphviz.test_output(self)
 
 
 class TestGraphvizBlockStart(TestGraphviz):
