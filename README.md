@@ -7,7 +7,7 @@ Graphviz: A Plugin for Pelican
 
 Graphviz is a Pelican plugin that allows the inclusion of [Graphviz][] images using the Markdown markup format. The code for the Graphviz figure is included as a block in the article’s source, and the image is embedded in HTML using the Base64 format.
 
-[Graphviz](https://www.graphviz.org)
+[Graphviz]: https://www.graphviz.org
 
 
 Installation
