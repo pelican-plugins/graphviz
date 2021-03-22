@@ -88,10 +88,14 @@ The format of the embedded image is SVG, and there is currently no way to change
 Alternatives
 ------------
 
-An alternative to this plugin would be the Graphviz tag provided by the [Liquid Tags extension][] available at Github. However, this extension needs a patch to the [liquid_tags][] plugin, which complicates its installation.
+An alternative to this plugin would be the [graphviz tag][] provided by the [Liquid Tags plugin][]. The Graphviz plugin differs from Liquid Tags in many aspects. First, Liquid Tags uses the the syntax `{% graphviz { <program> […] } %}`, while the Graphviz plugin uses the Markdown extension syntax `..graphviz <program> […]`. As regards the output, these are the differences:
 
-[Liquid Tags extension]: http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags/
-[liquid_tags]: https://github.com/dorneanu/pelican-plugins/tree/master/liquid_tags
+[graphviz tag]: https://github.com/pelican-plugins/liquid-tags/blob/main/pelican/plugins/liquid_tags/graphviz.py
+[Liquid Tags plugin]: https://github.com/pelican-plugins/liquid-tags
+
+- Both plugins output an element with `class="graphviz"`. However, only the Graphviz plugin allows to change the class name through a configuration variable (`GRAPHVIZ_IMAGE_CLASS`).
+- Liquid Tags encodes the image as `src="data:image/png;base64,[…]"`, while the Graphviz plugin encodes it as `src="data:image/svg+xml;base64,[…]"`. This has two impacts. First, the size of the produced HTML code is much smaller for the Graphviz plugin. For instance, the a base64 string for the Graphviz code `digraph graphname {a -> b -> c; b -> d;}` is four times smaller. Second, the output of Liquid Tags is pixelated, while the output of the Graphviz plugin is vectorial and the resulting web page can be zoomed without loss of quality.
+- Liquid Tags outputs the Graphviz image inside a `<span>`, while the choice of the container element ois free in the Graphviz plugin.
 
 
 To-Do
