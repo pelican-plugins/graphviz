@@ -95,7 +95,7 @@ An alternative to this plugin would be the [graphviz tag][] provided by the [Liq
 
 - Both plugins output an element with `class="graphviz"`. However, only the Graphviz plugin allows to change the class name through a configuration variable (`GRAPHVIZ_IMAGE_CLASS`).
 - Liquid Tags encodes the image as `src="data:image/png;base64,[…]"`, while the Graphviz plugin encodes it as `src="data:image/svg+xml;base64,[…]"`. This has two impacts. First, the size of the produced HTML code is much smaller for the Graphviz plugin. For instance, the a base64 string for the Graphviz code `digraph graphname {a -> b -> c; b -> d;}` is four times smaller. Second, the output of Liquid Tags is pixelated, while the output of the Graphviz plugin is vectorial and the resulting web page can be zoomed without loss of quality.
-- Liquid Tags outputs the Graphviz image inside a `<span>`, while the choice of the container element ois free in the Graphviz plugin.
+- Liquid Tags outputs the Graphviz image inside a `<span>`, while the choice of the container element is free for the Graphviz plugin.
 
 
 To-Do
