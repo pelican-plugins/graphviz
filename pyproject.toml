@@ -50,7 +50,7 @@ Werkzeug = "^1.0"
 markdown = ["markdown"]
 
 [tool.autopub]
-project-name = "graphviz"
+project-name = "Graphviz"
 git-username = "botpub"
 git-email = "botpub@autopub.rocks"
 append-github-contributor = true
