@@ -21,6 +21,10 @@ Graphviz must be installed on the system, otherwise this plugin will be deactiva
 
     sudo aptitude install graphviz
 
+For macOS, Graphviz can be installed via Homebrew:
+
+    brew install graphviz
+
 
 Usage
 -----
