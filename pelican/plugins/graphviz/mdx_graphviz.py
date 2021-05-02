@@ -72,7 +72,9 @@ def run_graphviz(program, code, options=[], format="png"):
         )
     else:
         p = Popen(dot_args, stdout=PIPE, stdin=PIPE, stderr=PIPE)
-        wentwrong = False
+
+    # Initialize error flag variable
+    wentwrong = False
 
     try:
         # Graphviz may close standard input when an error occurs,
