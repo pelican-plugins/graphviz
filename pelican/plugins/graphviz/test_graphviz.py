@@ -31,13 +31,15 @@ TEST_DIR_PREFIX = "pelicantests."
 GRAPHVIZ_RE = (
     r'<{0} class="{1}"><img src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
 )
+GRAPHVIZ_RE_XML = r'<\?xml version='
 
 
 class TestGraphviz(unittest.TestCase):
     """Class for testing the URL output of the Graphviz plugin"""
 
     def setUp(
-        self, block_start="..graphviz", image_class="graphviz", html_element="div"
+        self, block_start="..graphviz", image_class="graphviz", html_element="div",
+        compress=True,
     ):
 
         # Set the paths for the input (content) and output (html) files
@@ -53,6 +55,7 @@ class TestGraphviz(unittest.TestCase):
             "GRAPHVIZ_HTML_ELEMENT": html_element,
             "GRAPHVIZ_BLOCK_START": block_start,
             "GRAPHVIZ_IMAGE_CLASS": image_class,
+            "GRAPHVIZ_COMPRESS": compress,
         }
 
         # Store the image_class and the html_element in self, since they will be
@@ -95,9 +98,13 @@ digraph G {
         # Iterate over the lines and look for the HTML element corresponding
         # to the generated Graphviz figure
         for line in fid.readlines():
-            if re.search(GRAPHVIZ_RE.format(self.html_element, self.image_class), line):
-                found = True
-                break
+            if self.settings["GRAPHVIZ_COMPRESS"]:
+                if re.search(GRAPHVIZ_RE.format(self.html_element, self.image_class), line):
+                    found = True
+                    break
+            else:
+                if re.search(GRAPHVIZ_RE_XML, line):
+                    found = True
         assert found
 
 
@@ -134,4 +141,15 @@ class TestGraphvizImageClass(TestGraphviz):
 
     def test_output(self):
         """Test for GRAPHVIZ_IMAGE_CLASS setting"""
+        TestGraphviz.test_output(self)
+
+class TestGraphvizImageNoCompress(TestGraphviz):
+    """Class for exercising configuration variable GRAPHVIZ_COMPRESS"""
+
+    def setUp(self):
+        """Initialize the configuration"""
+        TestGraphviz.setUp(self, compress=False)
+
+    def test_output(self):
+        """Test for GRAPHVIZ_COMPRESS setting"""
         TestGraphviz.test_output(self)
