@@ -96,7 +96,9 @@ digraph G {
     def test_output(self):
         """Test for default values of the configuration variables"""
         # Open the output HTML file
-        content = open(os.path.join(self.output_path, "%s.html" % TEST_FILE_STEM)).read()
+        content = open(
+            os.path.join(self.output_path, "%s.html" % TEST_FILE_STEM)
+        ).read()
         found = False
         # Iterate over the lines and look for the HTML element corresponding
         # to the generated Graphviz figure
