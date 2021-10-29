@@ -137,7 +137,8 @@ class GraphvizProcessor(BlockProcessor):
             img = etree.SubElement(elt, "img")
             img.set(
                 "src",
-                "data:image/svg+xml;base64,%s" % base64.b64encode(output).decode("ascii"),
+                "data:image/svg+xml;base64,%s"
+                % base64.b64encode(output).decode("ascii"),
             )
         else:
             svg = output.decode()

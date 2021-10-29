@@ -38,7 +38,10 @@ class TestGraphviz(unittest.TestCase):
     """Class for testing the URL output of the Graphviz plugin"""
 
     def setUp(
-        self, block_start="..graphviz", image_class="graphviz", html_element="div",
+        self,
+        block_start="..graphviz",
+        image_class="graphviz",
+        html_element="div",
         compress=True,
     ):
 
@@ -99,7 +102,9 @@ digraph G {
         # to the generated Graphviz figure
         for line in fid.readlines():
             if self.settings["GRAPHVIZ_COMPRESS"]:
-                if re.search(GRAPHVIZ_RE.format(self.html_element, self.image_class), line):
+                if re.search(
+                    GRAPHVIZ_RE.format(self.html_element, self.image_class), line
+                ):
                     found = True
                     break
             else:
@@ -142,6 +147,7 @@ class TestGraphvizImageClass(TestGraphviz):
     def test_output(self):
         """Test for GRAPHVIZ_IMAGE_CLASS setting"""
         TestGraphviz.test_output(self)
+
 
 class TestGraphvizImageNoCompress(TestGraphviz):
     """Class for exercising configuration variable GRAPHVIZ_COMPRESS"""
