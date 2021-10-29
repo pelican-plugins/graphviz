@@ -133,11 +133,16 @@ class GraphvizProcessor(BlockProcessor):
 
         elt = etree.SubElement(parent, self.config["html-element"])
         elt.set("class", self.config["image-class"])
-        img = etree.SubElement(elt, "img")
-        img.set(
-            "src",
-            "data:image/svg+xml;base64,%s" % base64.b64encode(output).decode("ascii"),
-        )
+        if self.config["compress"]:
+            img = etree.SubElement(elt, "img")
+            img.set(
+                "src",
+                "data:image/svg+xml;base64,%s" % base64.b64encode(output).decode("ascii"),
+            )
+        else:
+            svg = output.decode()
+            start = svg.find("<svg")
+            elt.text = "\n" + svg[start:]
 
 
 class GraphvizExtension(Extension):

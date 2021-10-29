@@ -31,11 +31,13 @@ def initialize(pelicanobj):
     pelicanobj.settings.setdefault("GRAPHVIZ_BLOCK_START", "..graphviz")
     pelicanobj.settings.setdefault("GRAPHVIZ_IMAGE_CLASS", "graphviz")
     pelicanobj.settings.setdefault("GRAPHVIZ_HTML_ELEMENT", "div")
+    pelicanobj.settings.setdefault("GRAPHVIZ_COMPRESS", True)
 
     config = {
         "block-start": pelicanobj.settings.get("GRAPHVIZ_BLOCK_START"),
         "image-class": pelicanobj.settings.get("GRAPHVIZ_IMAGE_CLASS"),
         "html-element": pelicanobj.settings.get("GRAPHVIZ_HTML_ELEMENT"),
+        "compress": pelicanobj.settings.get("GRAPHVIZ_COMPRESS"),
     }
 
     if isinstance(
