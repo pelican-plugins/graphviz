@@ -31,7 +31,7 @@ TEST_DIR_PREFIX = "pelicantests."
 GRAPHVIZ_RE = (
     r'<{0} class="{1}"><img src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
 )
-GRAPHVIZ_RE_XML = r'<svg width="170pt" height="44pt"'
+GRAPHVIZ_RE_XML = r'<svg width="\d+pt" height="\d+pt"'
 
 
 class TestGraphviz(unittest.TestCase):
