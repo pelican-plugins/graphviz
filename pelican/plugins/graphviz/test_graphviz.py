@@ -96,11 +96,11 @@ digraph G {
     def test_output(self):
         """Test for default values of the configuration variables"""
         # Open the output HTML file
-        fid = open(os.path.join(self.output_path, "%s.html" % TEST_FILE_STEM))
+        content = open(os.path.join(self.output_path, "%s.html" % TEST_FILE_STEM)).read()
         found = False
         # Iterate over the lines and look for the HTML element corresponding
         # to the generated Graphviz figure
-        for line in fid.readlines():
+        for line in content.splitlines():
             if self.settings["GRAPHVIZ_COMPRESS"]:
                 if re.search(
                     GRAPHVIZ_RE.format(self.html_element, self.image_class), line
@@ -110,7 +110,7 @@ digraph G {
             else:
                 if re.search(GRAPHVIZ_RE_XML, line):
                     found = True
-        assert found
+        assert found, content
 
 
 class TestGraphvizHtmlElement(TestGraphviz):
