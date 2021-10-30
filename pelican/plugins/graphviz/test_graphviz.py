@@ -112,6 +112,7 @@ digraph G {
             else:
                 if re.search(GRAPHVIZ_RE_XML, line):
                     found = True
+                    break
         assert found, content
 
 
