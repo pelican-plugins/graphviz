@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+1.1.0 - 2021-11-01
+------------------
+
+Allow the SVG XML output code to be uncompressed (through the new
+configuration variable GRAPHVIZ_COMPRESS). This allows more featureful
+SVG images, for instance including clickable URLs. Thanks to Maxim
+Kochurov for the contribution.
+
 1.0.1 - 2021-05-03
 ------------------
 
