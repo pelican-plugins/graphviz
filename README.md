@@ -82,7 +82,7 @@ The following variables can be set in the Pelican settings file:
 
 - `GRAPHVIZ_BLOCK_START`: Starting tag for the Graphviz block in Markdown (defaults to `'..graphviz'`).
 
-- `GRAPHVIZ_COMPRESS`: Compresses the SVG XML to an image, without compression more SVG features are available (defaults to `True`).
+- `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance including clickable URLs inside the Graphviz diagram.
 
 
 Output Image Format
