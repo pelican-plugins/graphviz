@@ -1,2 +1,3 @@
+/dist/
 /pelican/plugins/graphviz/__pycache__/
 /poetry.lock
