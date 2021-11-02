@@ -107,7 +107,8 @@ An alternative to this plugin is the [Graphviz tag][] provided by the [Liquid Ta
 To-Do
 -----
 
-Contributions that make this plugin work with [reStructuredText][] content would be welcome.
+- Contributions that make this plugin work with [reStructuredText][] content would be welcome.
+- Contributing whit a new mechanism for allowing the control of compression at the individual level of `..graphviz` blocks (instead of the current site-wide mechanism provided by the `GRAPHVIZ_COMPRESS` variable) would also be welcome.
 
 [reStructuredText]: https://docutils.sourceforge.io/rst.html
 
