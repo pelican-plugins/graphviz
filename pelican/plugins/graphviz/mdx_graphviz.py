@@ -124,8 +124,8 @@ class GraphvizProcessor(BlockProcessor):
         config = self.config.copy()
 
         m = re.match(
-            r"^%s\s+(?:\[(.*)\]\s+)?([^\s]+)"
-            % config["block-start"], block.split("\n")[0]
+            r"^%s\s+(?:\[(.*)\]\s+)?([^\s]+)" % config["block-start"],
+            block.split("\n")[0],
         )
         if m:
             # Gather local configuration values
