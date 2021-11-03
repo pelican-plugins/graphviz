@@ -120,20 +120,36 @@ class GraphvizProcessor(BlockProcessor):
         # reiterate ad infinitum
         block = blocks.pop(0)
 
+        # Get a local copy of the configuration hash
+        config = self.config.copy()
+
         m = re.match(
-            r"^%s\s+([^\s]+)" % self.config["block-start"], block.split("\n")[0]
+            r"^%s\s+(?:\[(.*)\]\s+)?([^\s]+)"
+            % config["block-start"], block.split("\n")[0]
         )
         if m:
-            program = m.group(1)
+            # Gather local configuration values
+            if m.group(1):
+                for opt in m.group(1).split(","):
+                    m_opt = re.match(r"(.*)\s*=\s*(.*)", opt.strip())
+                    if m_opt:
+                        key = m_opt.group(1)
+                        val = m_opt.group(2)
+                        if val == "yes" or val == "no":
+                            config[key] = True if val == "yes" else False
+                        else:
+                            config[key] = val
+            # Get the graphviz program name and the input code
+            program = m.group(2)
             code = "\n".join(block.split("\n")[1:])
         else:
             return
 
         output = run_graphviz(program, code, format="svg")
 
-        elt = etree.SubElement(parent, self.config["html-element"])
-        elt.set("class", self.config["image-class"])
-        if self.config["compress"]:
+        elt = etree.SubElement(parent, config["html-element"])
+        elt.set("class", config["image-class"])
+        if config["compress"]:
             img = etree.SubElement(elt, "img")
             img.set(
                 "src",

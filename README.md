@@ -84,6 +84,13 @@ The following variables can be set in the Pelican settings file:
 
 - `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance including clickable URLs inside the Graphviz diagram.
 
+The values above can be overriden for each individual block using the syntax below:
+
+```markdwon
+..graphviz [key=val, ...] dot
+```
+The allowed keys are `html-element`, `image-class`, and `compress`. For the later, the value can be either `yes` or `no`.
+
 
 Output Image Format
 -------------------
