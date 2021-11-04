@@ -43,6 +43,9 @@ class TestGraphviz(unittest.TestCase):
         image_class="graphviz",
         html_element="div",
         compress=True,
+        options=None,
+        expected_html_element=None,
+        expected_image_class=None,
     ):
 
         # Set the paths for the input (content) and output (html) files
@@ -66,6 +69,16 @@ class TestGraphviz(unittest.TestCase):
         self.image_class = image_class
         self.html_element = html_element
 
+        # Get default expected values
+        if not expected_image_class:
+            self.expected_image_class = self.image_class
+        else:
+            self.expected_image_class = expected_image_class
+        if not expected_html_element:
+            self.expected_html_element = self.html_element
+        else:
+            self.expected_html_element = expected_html_element
+
         # Create the article file
         fid = open(os.path.join(self.content_path, "{}.md".format(TEST_FILE_STEM)), "w")
         # Write header
@@ -73,13 +86,14 @@ class TestGraphviz(unittest.TestCase):
         # Write Graphviz block
         fid.write(
             """
-{} dot
+{}{}dot
 digraph G {{
   graph [rankdir = LR];
   Hello -> World
 }}
 """.format(
-                block_start
+                block_start,
+                " [{}] ".format(options) if options else " ",
             )
         )
         fid.close()
@@ -106,7 +120,10 @@ digraph G {{
         for line in content.splitlines():
             if self.settings["GRAPHVIZ_COMPRESS"]:
                 if re.search(
-                    GRAPHVIZ_RE.format(self.html_element, self.image_class), line
+                    GRAPHVIZ_RE.format(
+                        self.expected_html_element, self.expected_image_class
+                    ),
+                    line,
                 ):
                     found = True
                     break
@@ -159,6 +176,23 @@ class TestGraphvizImageNoCompress(TestGraphviz):
     def setUp(self):
         """Initialize the configuration"""
         TestGraphviz.setUp(self, compress=False)
+
+    def test_output(self):
+        """Test for GRAPHVIZ_COMPRESS setting"""
+        TestGraphviz.test_output(self)
+
+
+class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
+    """Class for exercising configuration variable GRAPHVIZ_COMPRESS"""
+
+    def setUp(self):
+        """Initialize the configuration"""
+        TestGraphviz.setUp(
+            self,
+            html_element="div",
+            options="html-element=span",
+            expected_html_element="span",
+        )
 
     def test_output(self):
         """Test for GRAPHVIZ_COMPRESS setting"""
