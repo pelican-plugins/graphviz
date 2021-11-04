@@ -133,8 +133,10 @@ To start contributing to this plugin, review the [Contributing to Pelican][] doc
 Acknowledgments
 ---------------
 
-Thanks to [Justin Mayer](https://github.com/justinmayer) for helping with migration of this plugin under the Pelican Plugins organization and to [Maxim Kochurov](https://github.com/ferrine) for introducing the `GRAPHVIZ_COMPRESS` configuration variable.
+Thanks to [Justin Mayer][] for helping with migration of this plugin under the Pelican Plugins organization and to [Maxim Kochurov][] for introducing the `GRAPHVIZ_COMPRESS` configuration variable.
 
+[Justin Mayer]: https://github.com/justinmayer
+[Maxim Kochurov]: https://github.com/ferrine
 
 License
 -------
