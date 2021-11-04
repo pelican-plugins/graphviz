@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+1.2.1 - 2021-11-04
+------------------
+
+Maintenance release:
+
+- Drop item in ToDo list (was implemented in the previous release)
+
+- Use .format() instead of % operator to format strings
+
+- Add unit test for the setting of per-block configuration options
+
 1.2.0 - 2021-11-03
 ------------------
 
