@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pelican-graphviz"
-version = "1.2.1"
+version = "1.2.2"
 description = "Pelican plugin supporting Graphviz images in articles"
 authors = ["Rafael Laboissière <rafael@laboissiere.net>"]
 license = "AGPL-3.0"

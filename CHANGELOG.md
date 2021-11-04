@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+1.2.2 - 2021-11-04
+------------------
+
+Maintenance release:
+- Add Acknowledgments section in documentation
+- Use full URL for the figure in the documentation
+
 1.2.1 - 2021-11-04
 ------------------
 
