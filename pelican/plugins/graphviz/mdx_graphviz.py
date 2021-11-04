@@ -124,7 +124,7 @@ class GraphvizProcessor(BlockProcessor):
         config = self.config.copy()
 
         m = re.match(
-            r"^%s\s+(?:\[(.*)\]\s+)?([^\s]+)" % config["block-start"],
+            r"^{}\s+(?:\[(.*)\]\s+)?([^\s]+)".format(config["block-start"]),
             block.split("\n")[0],
         )
         if m:
@@ -153,8 +153,9 @@ class GraphvizProcessor(BlockProcessor):
             img = etree.SubElement(elt, "img")
             img.set(
                 "src",
-                "data:image/svg+xml;base64,%s"
-                % base64.b64encode(output).decode("ascii"),
+                "data:image/svg+xml;base64,{}".format(
+                    base64.b64encode(output).decode("ascii")
+                ),
             )
         else:
             svg = output.decode()

@@ -67,19 +67,20 @@ class TestGraphviz(unittest.TestCase):
         self.html_element = html_element
 
         # Create the article file
-        fid = open(os.path.join(self.content_path, "%s.md" % TEST_FILE_STEM), "w")
+        fid = open(os.path.join(self.content_path, "{}.md".format(TEST_FILE_STEM)), "w")
         # Write header
-        fid.write("Title: %s\nDate: 1970-01-01\n" % TEST_FILE_STEM)
+        fid.write("Title: {}\nDate: 1970-01-01\n".format(TEST_FILE_STEM))
         # Write Graphviz block
         fid.write(
             """
-%s dot
-digraph G {
+{} dot
+digraph G {{
   graph [rankdir = LR];
   Hello -> World
-}
-"""
-            % block_start
+}}
+""".format(
+                block_start
+            )
         )
         fid.close()
 
@@ -97,7 +98,7 @@ digraph G {
         """Test for default values of the configuration variables"""
         # Open the output HTML file
         content = open(
-            os.path.join(self.output_path, "%s.html" % TEST_FILE_STEM)
+            os.path.join(self.output_path, "{}.html".format(TEST_FILE_STEM))
         ).read()
         found = False
         # Iterate over the lines and look for the HTML element corresponding
