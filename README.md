@@ -41,7 +41,7 @@ digraph G {
 
 This will insert an image in your article like this:
 
-![figure](hello-world.png)
+![figure](https://github.com/pelican-plugins/graphviz/raw/main/hello-world.png)
 
 The block must start with `..graphviz` (this is configurable — see below). The word `dot` in the first line indicates the program that will be run to produce the image. The available programs are: `dot`, `neato`, `twopi`, `circo`, `fdp`, `sfdp`, and `patchwork` (see the [Graphviz documentation][] for details). The Graphviz code must start in the second line of the block. Notice that *newlines are not allowed inside the Graphviz block*.
 
