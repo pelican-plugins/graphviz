@@ -84,12 +84,12 @@ The following variables can be set in the Pelican settings file:
 
 - `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance including clickable URLs inside the Graphviz diagram.
 
-The values above can be overriden for each individual block using the syntax below:
+The values above can be overridden for each individual block using the syntax below:
 
 ```markdwon
 ..graphviz [key=val, ...] dot
 ```
-The allowed keys are `html-element`, `image-class`, and `compress`. For the later, the value can be either `yes` or `no`.
+The allowed keys are `html-element`, `image-class`, and `compress`. For the latter, the value can be either `yes` or `no`.
 
 
 Output Image Format
@@ -114,7 +114,7 @@ An alternative to this plugin is the [Graphviz tag][] provided by the [Liquid Ta
 To-Do
 -----
 
-Contributions that make this plugin work with [reStructuredText][] content would be welcome.
+Contributions that make this plugin work with [reStructuredText][] content are welcome.
 
 [reStructuredText]: https://docutils.sourceforge.io/rst.html
 
@@ -133,7 +133,7 @@ To start contributing to this plugin, review the [Contributing to Pelican][] doc
 Acknowledgments
 ---------------
 
-Thanks to [Justin Mayer][] for helping with migration of this plugin under the Pelican Plugins organization and to [Maxim Kochurov][] for introducing the `GRAPHVIZ_COMPRESS` configuration variable.
+Thanks to [Justin Mayer][], for helping with migration of this plugin under the Pelican Plugins organization, and to [Maxim Kochurov][], for introducing the `GRAPHVIZ_COMPRESS` configuration variable.
 
 [Justin Mayer]: https://github.com/justinmayer
 [Maxim Kochurov]: https://github.com/ferrine
