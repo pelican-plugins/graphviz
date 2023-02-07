@@ -47,7 +47,6 @@ class TestGraphviz(unittest.TestCase):
         expected_html_element=None,
         expected_image_class=None,
     ):
-
         # Set the paths for the input (content) and output (html) files
         self.output_path = mkdtemp(prefix=TEST_DIR_PREFIX)
         self.content_path = mkdtemp(prefix=TEST_DIR_PREFIX)
