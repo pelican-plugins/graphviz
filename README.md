@@ -1,7 +1,7 @@
 Graphviz: A Plugin for Pelican
 ==============================
 
-[![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/graphviz/build)](https://github.com/pelican-plugins/graphviz/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/pelican-plugins/graphviz/main.yml?branch=main)](https://github.com/pelican-plugins/graphviz/actions)
 [![PyPI Version](https://img.shields.io/pypi/v/pelican-graphviz)](https://pypi.org/project/pelican-graphviz/)
 ![License](https://img.shields.io/pypi/l/pelican-graphviz?color=blue)
 
