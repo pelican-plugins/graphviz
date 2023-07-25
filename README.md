@@ -138,9 +138,12 @@ Thanks to [Justin Mayer][], for helping with migration of this plugin under the 
 [Justin Mayer]: https://github.com/justinmayer
 [Maxim Kochurov]: https://github.com/ferrine
 
-License
--------
+Author
+------
 
 Copyright © 2015, 2021  Rafael Laboissière <rafael@laboissiere.net>
 
-This project is licensed under the AGPL 3.0 license.
+License
+-------
+
+This project is licensed under the terms of the AGPL 3.0 license.
