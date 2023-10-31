@@ -1,4 +1,4 @@
-"""Markdown Graphviz plugin for Pelican"""
+"""Markdown Graphviz plugin for Pelican."""
 
 # Copyright (C) 2015, 2021  Rafael Laboissière
 #
@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 
 def initialize(pelicanobj):
-    """Initialize the Markdown Graphviz plugin"""
+    """Initialize the Markdown Graphviz plugin."""
     pelicanobj.settings.setdefault("GRAPHVIZ_BLOCK_START", "..graphviz")
     pelicanobj.settings.setdefault("GRAPHVIZ_IMAGE_CLASS", "graphviz")
     pelicanobj.settings.setdefault("GRAPHVIZ_HTML_ELEMENT", "div")
@@ -51,7 +51,7 @@ def initialize(pelicanobj):
 
 
 def register():
-    """Register the Markdown Graphviz plugin with Pelican"""
+    """Register the Markdown Graphviz plugin with Pelican."""
     if subprocess.call(["dot", "-V"], stderr=open(os.devnull, "w")) == 0:
         signals.initialized.connect(initialize)
     else:

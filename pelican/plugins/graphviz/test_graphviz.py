@@ -1,4 +1,4 @@
-"""Unit testing suite for the Graphviz plugin"""
+"""Unit testing suite for the Graphviz plugin."""
 
 # Copyright (C) 2015, 2021  Rafael Laboissière <rafael@laboissiere.net>
 #
@@ -35,7 +35,7 @@ GRAPHVIZ_RE_XML = r'<svg width="\d+pt" height="\d+pt"'
 
 
 class TestGraphviz(unittest.TestCase):
-    """Class for testing the URL output of the Graphviz plugin"""
+    """Class for testing the URL output of the Graphviz plugin."""
 
     def setUp(
         self,
@@ -47,6 +47,7 @@ class TestGraphviz(unittest.TestCase):
         expected_html_element=None,
         expected_image_class=None,
     ):
+        """Set up the test environment."""
         # Set the paths for the input (content) and output (html) files
         self.output_path = mkdtemp(prefix=TEST_DIR_PREFIX)
         self.content_path = mkdtemp(prefix=TEST_DIR_PREFIX)
@@ -103,12 +104,12 @@ digraph G {{
         pelican.run()
 
     def tearDown(self):
-        """Clean up the temporary directories"""
+        """Tidy up the test environment."""
         rmtree(self.output_path)
         rmtree(self.content_path)
 
     def test_output(self):
-        """Test for default values of the configuration variables"""
+        """Test for default values of the configuration variables."""
         # Open the output HTML file
         content = open(os.path.join(self.output_path, f"{TEST_FILE_STEM}.html")).read()
         found = False
@@ -132,58 +133,58 @@ digraph G {{
 
 
 class TestGraphvizHtmlElement(TestGraphviz):
-    """Class for exercising the configuration variable GRAPHVIZ_HTML_ELEMENT"""
+    """Class for exercising the configuration variable GRAPHVIZ_HTML_ELEMENT."""
 
     def setUp(self):
-        """Initialize the configuration"""
+        """Initialize the configuration."""
         TestGraphviz.setUp(self, html_element="span")
 
     def test_output(self):
-        """Test for GRAPHVIZ_HTML_ELEMENT setting"""
+        """Test for GRAPHVIZ_HTML_ELEMENT setting."""
         TestGraphviz.test_output(self)
 
 
 class TestGraphvizBlockStart(TestGraphviz):
-    """Class for exercising the configuration variable GRAPHVIZ_BLOCK_START"""
+    """Class for exercising the configuration variable GRAPHVIZ_BLOCK_START."""
 
     def setUp(self):
-        """Initialize the configuration"""
+        """Initialize the configuration."""
         TestGraphviz.setUp(self, block_start="==foobar")
 
     def test_output(self):
-        """Test for GRAPHVIZ_BLOCK_START setting"""
+        """Test for GRAPHVIZ_BLOCK_START setting."""
         TestGraphviz.test_output(self)
 
 
 class TestGraphvizImageClass(TestGraphviz):
-    """Class for exercising configuration variable GRAPHVIZ_IMAGE_CLASS"""
+    """Class for exercising configuration variable GRAPHVIZ_IMAGE_CLASS."""
 
     def setUp(self):
-        """Initialize the configuration"""
+        """Initialize the configuration."""
         TestGraphviz.setUp(self, image_class="foo")
 
     def test_output(self):
-        """Test for GRAPHVIZ_IMAGE_CLASS setting"""
+        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
         TestGraphviz.test_output(self)
 
 
 class TestGraphvizImageNoCompress(TestGraphviz):
-    """Class for exercising configuration variable GRAPHVIZ_COMPRESS"""
+    """Class for exercising configuration variable GRAPHVIZ_COMPRESS."""
 
     def setUp(self):
-        """Initialize the configuration"""
+        """Initialize the configuration."""
         TestGraphviz.setUp(self, compress=False)
 
     def test_output(self):
-        """Test for GRAPHVIZ_COMPRESS setting"""
+        """Test for GRAPHVIZ_COMPRESS setting."""
         TestGraphviz.test_output(self)
 
 
 class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
-    """Class for exercising configuration variable GRAPHVIZ_COMPRESS"""
+    """Class for exercising configuration variable GRAPHVIZ_COMPRESS."""
 
     def setUp(self):
-        """Initialize the configuration"""
+        """Initialize the configuration."""
         TestGraphviz.setUp(
             self,
             html_element="div",
@@ -192,5 +193,5 @@ class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
         )
 
     def test_output(self):
-        """Test for GRAPHVIZ_COMPRESS setting"""
+        """Test for GRAPHVIZ_COMPRESS setting."""
         TestGraphviz.test_output(self)

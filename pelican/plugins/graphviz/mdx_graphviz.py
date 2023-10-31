@@ -1,4 +1,4 @@
-"""Markdown extension for the Graphviz plugin for Pelican"""
+"""Markdown extension for the Graphviz plugin for Pelican."""
 
 # Copyright (C) 2015, 2021  Rafael Laboissière
 #
@@ -57,7 +57,7 @@ from markdown.blockprocessors import BlockProcessor
 
 
 def run_graphviz(program, code, options=[], format="png"):
-    """Runs graphviz programs and returns image data"""
+    """Run graphviz program and returns image data."""
     import os
     from subprocess import PIPE, Popen
 
@@ -103,19 +103,19 @@ def run_graphviz(program, code, options=[], format="png"):
 
 
 class GraphvizProcessor(BlockProcessor):
-    """Block processor for the Graphviz Markdown Extension"""
+    """Block processor for the Graphviz Markdown Extension."""
 
     def __init__(self, md_parser, config):
-        """Class initialization"""
+        """Class initialization."""
         self.config = config
         BlockProcessor.__init__(self, md_parser)
 
     def test(self, parent, block):
-        """Tells the Markdown processor that this block is for us"""
+        """Tell the Markdown processor that this block is for us."""
         return block.startswith(self.config["block-start"])
 
     def run(self, parent, blocks):
-        """Do the actual formatting"""
+        """Do the actual formatting."""
         # The following line is extremely important, otherwise it will
         # reiterate ad infinitum
         block = blocks.pop(0)
@@ -164,14 +164,14 @@ class GraphvizProcessor(BlockProcessor):
 
 
 class GraphvizExtension(Extension):
-    """Markdow extension for Graphviz blocks"""
+    """Markdow extension for Graphviz blocks."""
 
     def __init__(self, config):
-        """Initialization code for the GraphvizExtension class"""
+        """Initialize the GraphvizExtension class."""
         self.config = config
 
     def extendMarkdown(self, md):
-        """Add an instance of GraphvizProcessor to BlockParser"""
+        """Add an instance of GraphvizProcessor to BlockParser."""
         md.registerExtension(self)
         md.parser.blockprocessors.register(
             GraphvizProcessor(md.parser, self.config), "graphviz", 200
