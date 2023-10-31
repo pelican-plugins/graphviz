@@ -61,17 +61,17 @@ def run_graphviz(program, code, options=[], format="png"):
     import os
     from subprocess import PIPE, Popen
 
-    dot_args = [program] + options + ["-T", format]
+    dot_command = [program] + options + ["-T", format]
 
     if os.name == "nt":
         # Avoid opening shell window.
         # * https://github.com/tkf/ipython-hierarchymagic/issues/1
         # * http://stackoverflow.com/a/2935727/727827
         p = Popen(
-            dot_args, stdout=PIPE, stdin=PIPE, stderr=PIPE, creationflags=0x08000000
+            dot_command, stdout=PIPE, stdin=PIPE, stderr=PIPE, creationflags=0x08000000
         )
     else:
-        p = Popen(dot_args, stdout=PIPE, stdin=PIPE, stderr=PIPE)
+        p = Popen(dot_command, stdout=PIPE, stdin=PIPE, stderr=PIPE)
 
     # Initialize error flag variable
     wentwrong = False
