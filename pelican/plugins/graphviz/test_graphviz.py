@@ -80,23 +80,22 @@ class TestGraphviz(unittest.TestCase):
             self.expected_html_element = expected_html_element
 
         # Create the article file
-        fid = open(os.path.join(self.content_path, f"{TEST_FILE_STEM}.md"), "w")
-        # Write header
-        fid.write(f"Title: {TEST_FILE_STEM}\nDate: 1970-01-01\n")
-        # Write Graphviz block
-        fid.write(
-            """
+        with open(os.path.join(self.content_path, f"{TEST_FILE_STEM}.md"), "w") as fid:
+            # Write header
+            fid.write(f"Title: {TEST_FILE_STEM}\nDate: 1970-01-01\n")
+            # Write Graphviz block
+            fid.write(
+                """
 {}{}dot
 digraph G {{
   graph [rankdir = LR];
   Hello -> World
 }}
 """.format(
-                block_start,
-                f" [{options}] " if options else " ",
+                    block_start,
+                    f" [{options}] " if options else " ",
+                )
             )
-        )
-        fid.close()
 
         # Run the Pelican instance
         self.settings = read_settings(override=settings)
@@ -111,25 +110,25 @@ digraph G {{
     def test_output(self):
         """Test for default values of the configuration variables."""
         # Open the output HTML file
-        content = open(os.path.join(self.output_path, f"{TEST_FILE_STEM}.html")).read()
-        found = False
-        # Iterate over the lines and look for the HTML element corresponding
-        # to the generated Graphviz figure
-        for line in content.splitlines():
-            if self.settings["GRAPHVIZ_COMPRESS"]:
-                if re.search(
-                    GRAPHVIZ_RE.format(
-                        self.expected_html_element, self.expected_image_class
-                    ),
-                    line,
-                ):
+        with open(os.path.join(self.output_path, f"{TEST_FILE_STEM}.html")) as fid:
+            content = fid.read()
+            found = False
+            # Iterate over the lines and look for the HTML element corresponding
+            # to the generated Graphviz figure
+            for line in content.splitlines():
+                if self.settings["GRAPHVIZ_COMPRESS"]:
+                    if re.search(
+                            GRAPHVIZ_RE.format(
+                                self.expected_html_element, self.expected_image_class
+                            ),
+                            line,
+                    ):
+                        found = True
+                        break
+                elif re.search(GRAPHVIZ_RE_XML, line):
                     found = True
                     break
-            else:
-                if re.search(GRAPHVIZ_RE_XML, line):
-                    found = True
-                    break
-        assert found, content
+            assert found, content
 
 
 class TestGraphvizHtmlElement(TestGraphviz):

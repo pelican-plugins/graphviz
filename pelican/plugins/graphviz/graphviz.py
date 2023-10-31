@@ -52,10 +52,11 @@ def initialize(pelicanobj):
 
 def register():
     """Register the Markdown Graphviz plugin with Pelican."""
-    if subprocess.call(["dot", "-V"], stderr=open(os.devnull, "w")) == 0:
-        signals.initialized.connect(initialize)
-    else:
-        logger.warning(
-            "The dot program from Graphviz is not available. "
-            "The Graphviz plugin is deactivated."
-        )
+    with open(os.devnull, "w") as fid:
+        if subprocess.call(["dot", "-V"], stderr=fid) == 0:
+            signals.initialized.connect(initialize)
+        else:
+            logger.warning(
+                "The dot program from Graphviz is not available. "
+                "The Graphviz plugin is deactivated."
+            )
