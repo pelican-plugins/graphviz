@@ -118,10 +118,10 @@ digraph G {{
             for line in content.splitlines():
                 if self.settings["GRAPHVIZ_COMPRESS"]:
                     if re.search(
-                            GRAPHVIZ_RE.format(
-                                self.expected_html_element, self.expected_image_class
-                            ),
-                            line,
+                        GRAPHVIZ_RE.format(
+                            self.expected_html_element, self.expected_image_class
+                        ),
+                        line,
                     ):
                         found = True
                         break
