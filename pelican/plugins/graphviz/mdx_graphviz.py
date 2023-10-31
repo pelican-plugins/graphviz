@@ -56,6 +56,14 @@ from markdown import Extension
 from markdown.blockprocessors import BlockProcessor
 
 
+class DotRuntimeError(RuntimeError):
+    """Exception for dot program."""
+
+    def __init__(self, errmsg):
+        """Emit the error message."""
+        super().__init__(f"dot exited with error:\n[stderr]\n{errmsg}")
+
+
 def run_graphviz(program, code, options=None, format="png"):
     """Run graphviz program and returns image data."""
     import os
@@ -100,7 +108,7 @@ def run_graphviz(program, code, options=None, format="png"):
 
     if p.returncode != 0:
         errmsg = stderr.decode("utf-8")
-        raise RuntimeError(f"dot exited with error:\n[stderr]\n{errmsg}")
+        raise DotRuntimeError(errmsg)
 
     return stdout
 
