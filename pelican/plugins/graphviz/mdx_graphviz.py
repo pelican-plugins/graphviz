@@ -61,7 +61,7 @@ def run_graphviz(program, code, options=[], format="png"):
     import os
     from subprocess import PIPE, Popen
 
-    dot_command = [program] + options + ["-T", format]
+    dot_command = [program, *options, "-T", format]
 
     if os.name == "nt":
         # Avoid opening shell window.
