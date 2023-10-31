@@ -92,11 +92,7 @@ def run_graphviz(program, code, options=None, format="png"):
         # resulting in a broken pipe on communicate()
         stdout, stderr = p.communicate(code.encode("utf-8"))
     except OSError as err:
-        if err.errno != errno.EPIPE:
-            raise
-        wentwrong = True
-    except OSError as err:
-        if err.errno != errno.EINVAL:
+        if err.errno not in (errno.EPIPE, errno.EINVAL):
             raise
         wentwrong = True
 
