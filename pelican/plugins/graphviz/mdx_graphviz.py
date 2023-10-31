@@ -142,8 +142,8 @@ class GraphvizProcessor(BlockProcessor):
                     if m_opt:
                         key = m_opt.group(1)
                         val = m_opt.group(2)
-                        if val == "yes" or val == "no":
-                            config[key] = True if val == "yes" else False
+                        if val in ("yes", "no"):
+                            config[key] = val == "yes"
                         else:
                             config[key] = val
             # Get the graphviz program name and the input code
