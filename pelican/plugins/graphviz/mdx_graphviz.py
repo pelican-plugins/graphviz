@@ -56,10 +56,13 @@ from markdown import Extension
 from markdown.blockprocessors import BlockProcessor
 
 
-def run_graphviz(program, code, options=[], format="png"):
+def run_graphviz(program, code, options=None, format="png"):
     """Run graphviz program and returns image data."""
     import os
     from subprocess import PIPE, Popen
+
+    if not options:
+        options = []
 
     dot_command = [program, *options, "-T", format]
 
