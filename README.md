@@ -141,7 +141,7 @@ Thanks to [Justin Mayer][], for helping with migration of this plugin under the 
 Author
 ------
 
-Copyright © 2015, 2021  Rafael Laboissière <rafael@laboissiere.net>
+Copyright © 2015, 2021, 2023  Rafael Laboissière <rafael@laboissiere.net>
 
 License
 -------
