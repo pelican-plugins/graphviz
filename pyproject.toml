@@ -89,8 +89,6 @@ ignore = [
   "PLR0913", # too many arguments in function definition
 ]
 
-target-version = "py38"
-
 [tool.ruff.isort]
 combine-as-imports = true
 force-sort-within-sections = true
