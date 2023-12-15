@@ -19,9 +19,11 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+
 requires-python = ">=3.8.1,<4.0"
 dependencies = [
     "pelican>=4.5",
@@ -48,7 +50,6 @@ test = [
     "pytest-cov>=4.0",
     "pytest-sugar>=0.9.7",
 ]
-
 
 [tool.autopub]
 project-name = "Graphviz"
