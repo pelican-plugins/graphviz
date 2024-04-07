@@ -1,6 +1,6 @@
 [project]
 name = "pelican-graphviz"
-version = "1.2.3"
+version = "1.2.4"
 description = "Pelican plugin supporting Graphviz images in articles"
 authors = [{name = "Rafael Laboissière", email = "rafael@laboissiere.net"}]
 license = {text = "AGPL-3.0"}
