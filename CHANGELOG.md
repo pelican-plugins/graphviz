@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+1.2.5 - 2024-04-14
+------------------
+
+Ensure plugin is included in sdist build
+
 1.2.4 - 2024-04-07
 ------------------
 
