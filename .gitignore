@@ -1,3 +1,4 @@
 /dist/
 /pdm.lock
+/.pdm.toml
 __pycache__/
