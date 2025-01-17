@@ -28,9 +28,8 @@ from . import graphviz
 
 TEST_FILE_STEM = "test"
 TEST_DIR_PREFIX = "pelicantests."
-GRAPHVIZ_RE = (
-    r'<{0} class="{1}"><img alt="{2}" src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
-)
+GRAPHVIZ_RE = r'<{0} class="{1}"><img alt="{2}" src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
+
 GRAPHVIZ_RE_XML = r'<svg width="\d+pt" height="\d+pt"'
 
 
