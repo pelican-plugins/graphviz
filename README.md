@@ -163,7 +163,8 @@ Thanks to [weeheavy] for suggesting the addition of the `alt` property to the HT
 Author
 ------
 
-Copyright © 2015, 2021, 2023, 2024  Rafael Laboissière <rafael@laboissiere.net>
+Copyright © 2015, 2021, 2023–2025  Rafael Laboissière <rafael@laboissiere.net>
+
 
 License
 -------

@@ -1,6 +1,6 @@
 """Unit testing suite for the Graphviz plugin."""
 
-# Copyright (C) 2015, 2021, 2023  Rafael Laboissière <rafael@laboissiere.net>
+# Copyright (C) 2015, 2021, 2023, 2025  Rafael Laboissière <rafael@laboissiere.net>
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Affero Public License as published by
