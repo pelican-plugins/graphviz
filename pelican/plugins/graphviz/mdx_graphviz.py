@@ -141,15 +141,16 @@ class GraphvizProcessor(BlockProcessor):
         if m:
             # Gather local configuration values
             if m.group(1):
-                for opt in m.group(1).split(","):
-                    m_opt = re.match(r"(.*)\s*=\s*(.*)", opt.strip())
-                    if m_opt:
-                        key = m_opt.group(1)
-                        val = m_opt.group(2)
-                        if val in ("yes", "no"):
-                            config[key] = val == "yes"
-                        else:
-                            config[key] = val
+                for keyval in re.findall(
+                        r'\s*([^=\s]*)\s*=\s*([^"=,\s]*|"[^"]*")\s*(?:,|$)',
+                        m.group(1),
+                ):
+                    key = keyval[0]
+                    val = keyval[1].strip('"')
+                    if val in ("yes", "no"):
+                        config[key] = (val == "yes")
+                    else:
+                        config[key] = val
             # Get the graphviz program name and the input code
             program = m.group(2)
             code = "\n".join(block.split("\n")[1:])
@@ -173,6 +174,21 @@ class GraphvizProcessor(BlockProcessor):
                     base64.b64encode(output).decode("ascii")
                 ),
             )
+            # Set the alt text. Order of priority:
+            #    1. Block option alt-text
+            #    2. ID of Graphviz object
+            #    3. Global GRAPHVIZ_ALT_TEXT option
+            if config["alt-text"]:
+                img.set("alt", config["alt-text"])
+            else:
+                m = re.search(
+                    r"<!-- Title: (.*) Pages: \d+ -->",
+                    output.decode("utf-8"),
+                )
+                if m:
+                    img.set("alt", m.group(1))
+                else:
+                    img.set("alt", config["alt-text-default"])
         else:
             svg = output.decode()
             start = svg.find("<svg")
