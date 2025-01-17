@@ -158,8 +158,13 @@ class GraphvizProcessor(BlockProcessor):
 
         output = run_graphviz(program, code, format="svg")
 
+        # Set HTML element
         elt = etree.SubElement(parent, config["html-element"])
+
+        # Set CSS class
         elt.set("class", config["image-class"])
+
+        # Cope with compression
         if config["compress"]:
             img = etree.SubElement(elt, "img")
             img.set(
