@@ -64,8 +64,8 @@ class TestGraphviz(unittest.TestCase):
             "GRAPHVIZ_COMPRESS": compress,
         }
 
-        # Store the image_class and the html_element in self, since they will be
-        # needed in the test_output method defined below
+        # Store the image_class and the html_element in self, since they will
+        # be needed in the test_output method defined below
         self.image_class = image_class
         self.html_element = html_element
 

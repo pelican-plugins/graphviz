@@ -79,7 +79,11 @@ def run_graphviz(program, code, options=None, format="png"):
         # * https://github.com/tkf/ipython-hierarchymagic/issues/1
         # * http://stackoverflow.com/a/2935727/727827
         p = Popen(
-            dot_command, stdout=PIPE, stdin=PIPE, stderr=PIPE, creationflags=0x08000000
+            dot_command,
+            stdout=PIPE,
+            stdin=PIPE,
+            stderr=PIPE,
+            creationflags=0x08000000,
         )
     else:
         p = Popen(dot_command, stdout=PIPE, stdin=PIPE, stderr=PIPE)
