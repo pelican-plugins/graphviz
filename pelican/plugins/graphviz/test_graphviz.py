@@ -29,7 +29,7 @@ from . import graphviz
 TEST_FILE_STEM = "test"
 TEST_DIR_PREFIX = "pelicantests."
 GRAPHVIZ_RE = (
-    r'<{0} class="{1}"><img src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
+    r'<{0} class="{1}"><img alt="{2}" src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
 )
 GRAPHVIZ_RE_XML = r'<svg width="\d+pt" height="\d+pt"'
 
@@ -42,10 +42,13 @@ class TestGraphviz(unittest.TestCase):
         block_start="..graphviz",
         image_class="graphviz",
         html_element="div",
+        alt_text="GRAPH",
         compress=True,
         options=None,
         expected_html_element=None,
         expected_image_class=None,
+        expected_alt_text=None,
+        digraph_id="G",
     ):
         """Set up the test environment."""
         # Set the paths for the input (content) and output (html) files
@@ -61,6 +64,7 @@ class TestGraphviz(unittest.TestCase):
             "GRAPHVIZ_HTML_ELEMENT": html_element,
             "GRAPHVIZ_BLOCK_START": block_start,
             "GRAPHVIZ_IMAGE_CLASS": image_class,
+            "GRAPHVIZ_ALT_TEXT": alt_text,
             "GRAPHVIZ_COMPRESS": compress,
         }
 
@@ -68,6 +72,7 @@ class TestGraphviz(unittest.TestCase):
         # be needed in the test_output method defined below
         self.image_class = image_class
         self.html_element = html_element
+        self.alt_text = alt_text
 
         # Get default expected values
         if not expected_image_class:
@@ -78,6 +83,10 @@ class TestGraphviz(unittest.TestCase):
             self.expected_html_element = self.html_element
         else:
             self.expected_html_element = expected_html_element
+        if not expected_alt_text:
+            self.expected_alt_text = digraph_id if digraph_id else alt_text
+        else:
+            self.expected_alt_text = expected_alt_text
 
         # Create the article file
         with open(os.path.join(self.content_path, f"{TEST_FILE_STEM}.md"), "w") as fid:
@@ -87,13 +96,14 @@ class TestGraphviz(unittest.TestCase):
             fid.write(
                 """
 {}{}dot
-digraph G {{
+digraph {} {{
   graph [rankdir = LR];
   Hello -> World
 }}
 """.format(
                     block_start,
                     f" [{options}] " if options else " ",
+                    digraph_id if digraph_id else "",
                 )
             )
 
@@ -119,7 +129,9 @@ digraph G {{
                 if self.settings["GRAPHVIZ_COMPRESS"]:
                     if re.search(
                         GRAPHVIZ_RE.format(
-                            self.expected_html_element, self.expected_image_class
+                            self.expected_html_element,
+                            self.expected_image_class,
+                            self.expected_alt_text,
                         ),
                         line,
                     ):
@@ -193,4 +205,51 @@ class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
 
     def test_output(self):
         """Test for overrind the configuration."""
+        TestGraphviz.test_output(self)
+
+
+class TestGraphvizAltText(TestGraphviz):
+    """Class for exercising configuration variable GRAPHVIZ_ALT_TEXT."""
+
+    def setUp(self):
+        """Initialize the configuration."""
+        TestGraphviz.setUp(self, alt_text="foo")
+
+    def test_output(self):
+        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
+        TestGraphviz.test_output(self)
+
+
+class TestGraphvizAltTextWithoutID(TestGraphviz):
+    """Class for testing the case where the Graphviz element has no id."""
+
+    def setUp(self):
+        """Initialize the configuration."""
+        text = "foo"
+        TestGraphviz.setUp(
+            self,
+            digraph_id=None,
+            alt_text=text,
+            expected_alt_text=text,
+        )
+
+    def test_output(self):
+        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
+        TestGraphviz.test_output(self)
+
+
+class TestGraphvizAltTextViaOption(TestGraphviz):
+    """Class for testing the case where the alternative text is given via the alt-text option."""
+
+    def setUp(self):
+        """Initialize the configuration."""
+        text = "A wonderful graph"
+        TestGraphviz.setUp(
+            self,
+            options=f'alt-text="{text}"',
+            expected_alt_text=text,
+        )
+
+    def test_output(self):
+        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
         TestGraphviz.test_output(self)
