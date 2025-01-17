@@ -5,7 +5,7 @@ Graphviz: A Plugin for Pelican
 [![PyPI Version](https://img.shields.io/pypi/v/pelican-graphviz)](https://pypi.org/project/pelican-graphviz/)
 [![License](https://img.shields.io/pypi/l/pelican-graphviz?color=blue)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
-Graphviz is a Pelican plugin that allows the inclusion of [Graphviz][] images using the Markdown markup format. The code for the Graphviz figure is included as a block in the article’s source, and the image is embedded in HTML using the Base64 format.
+Graphviz is a Pelican plugin that allows the inclusion of [Graphviz][] images using the Markdown markup format. The code for the Graphviz figure is included as a block in the article’s source. In the output HTML file, the Graphviz figure can appear as either a `<svg>` or embedded into a `<img>` element using the Base64 format.
 
 [Graphviz]: https://www.graphviz.org
 
