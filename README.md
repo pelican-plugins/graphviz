@@ -84,18 +84,34 @@ The following variables can be set in the Pelican settings file:
 
 - `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance including clickable URLs inside the Graphviz diagram.
 
+- `GRAPHVIZ_ALT_TEXT`: String that will be used as the default value for the `alt` property of the generated `<img>` HTML element (defaults to `"[GRAPH]"`). It is only meaningful when the reuslting SVG output is compressed.
+
 The values above can be overridden for each individual block using the syntax below:
 
 ```markdwon
-..graphviz [key=val, ...] dot
+..graphviz [key1=val1, key2="val2"...] dot
 ```
-The allowed keys are `html-element`, `image-class`, and `compress`. For the latter, the value can be either `yes` or `no`.
+The allowed keys are `html-element`, `image-class`, `block-start`, `alt-text`, and `compress`. For the latter, the value can be either `yes` or `no`.
+
+If the value needs to include a comma (`,`) or an equal sign (`=`), then use the `key2="val2"` form.
 
 
 Output Image Format
 -------------------
 
 The format of the embedded image is SVG, and there is currently no way to change it. This format was chosen over others (like PNG) for two reasons. First, the generated SRC string in Base64 seem to be shorter for SVG than for PNG. Second, the image will be available in the browser in a high-quality vectorized format. As a caveat, notice that this choice may prevent display in browsers lacking proper SVG support.
+
+
+Text alternative for the image
+------------------------------
+
+When generating compressed SVG images (the default), an `<img>` element will appear in the HTML output. According to the [Web Content Accessibility Guidelines], non-text content, like `<img>` elements, should have an text alternative. The graphviz plugin complies with this recommendation and always generate a `alt` property for the generated `<img>` element. The value of the `alt` property will be, in order of priority:
+
+1. The value of the Graphviz block option `alt-text`,
+2. the ID of the Graphviz element (`"G"` in the example above), or
+3. the value of the global configuration variable `GRAPHVIZ_ALT_TEXT`.
+
+[Web Content Accessibility Guidelines]: https://www.w3.org/TR/WCAG22/#non-text-content
 
 
 Alternatives
@@ -137,6 +153,12 @@ Thanks to [Justin Mayer][], for helping with migration of this plugin under the 
 
 [Justin Mayer]: https://github.com/justinmayer
 [Maxim Kochurov]: https://github.com/ferrine
+
+Thanks to [weeheavy] for suggesting the addition of the `alt` property to the HTML `<img>` generated element (issue [#30]).
+
+[weeheavy]: https://github.com/weeheavy
+[#30]: https://github.com/pelican-plugins/graphviz/issues/30
+
 
 Author
 ------
