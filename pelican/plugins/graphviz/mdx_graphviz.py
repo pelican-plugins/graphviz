@@ -142,8 +142,8 @@ class GraphvizProcessor(BlockProcessor):
             # Gather local configuration values
             if m.group(1):
                 for keyval in re.findall(
-                        r'\s*([^=\s]*)\s*=\s*([^"=,\s]*|"[^"]*")\s*(?:,|$)',
-                        m.group(1),
+                    r'\s*([^=\s]*)\s*=\s*([^"=,\s]*|"[^"]*")\s*(?:,|$)',
+                    m.group(1),
                 ):
                     key = keyval[0]
                     val = keyval[1].strip('"')
