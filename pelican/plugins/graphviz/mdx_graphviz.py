@@ -148,7 +148,7 @@ class GraphvizProcessor(BlockProcessor):
                     key = keyval[0]
                     val = keyval[1].strip('"')
                     if val in ("yes", "no"):
-                        config[key] = (val == "yes")
+                        config[key] = val == "yes"
                     else:
                         config[key] = val
             # Get the graphviz program name and the input code
