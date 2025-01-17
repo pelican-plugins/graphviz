@@ -180,7 +180,7 @@ class TestGraphvizImageNoCompress(TestGraphviz):
 
 
 class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
-    """Class for exercising configuration variable GRAPHVIZ_COMPRESS."""
+    """Class for exercising the override of a configuration variable."""
 
     def setUp(self):
         """Initialize the configuration."""
@@ -192,5 +192,5 @@ class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
         )
 
     def test_output(self):
-        """Test for GRAPHVIZ_COMPRESS setting."""
+        """Test for overrind the configuration."""
         TestGraphviz.test_output(self)
