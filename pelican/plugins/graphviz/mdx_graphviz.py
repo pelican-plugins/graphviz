@@ -50,7 +50,7 @@
 import base64
 import errno
 import re
-import xml.etree.ElementTree as etree
+import xml.etree.ElementTree as ET
 
 from markdown import Extension
 from markdown.blockprocessors import BlockProcessor
@@ -160,14 +160,14 @@ class GraphvizProcessor(BlockProcessor):
         output = run_graphviz(program, code, format="svg")
 
         # Set HTML element
-        elt = etree.SubElement(parent, config["html-element"])
+        elt = ET.SubElement(parent, config["html-element"])
 
         # Set CSS class
         elt.set("class", config["image-class"])
 
         # Cope with compression
         if config["compress"]:
-            img = etree.SubElement(elt, "img")
+            img = ET.SubElement(elt, "img")
             img.set(
                 "src",
                 "data:image/svg+xml;base64,{}".format(
