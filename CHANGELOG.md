@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+1.3.0 - 2025-01-18
+------------------
+
+The `<img>` element containing the compressed SVG figure will always have an text alternative (`alt` property). This text can be specified using the `alt-text` option of the graphviz block 
+(fixes issue #30)
+
 1.2.5 - 2024-04-14
 ------------------
 
