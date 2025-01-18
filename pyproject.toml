@@ -42,9 +42,8 @@ markdown = ["markdown>=3.4"]
 
 [tool.pdm.dev-dependencies]
 lint = [
-    "black>=23.10.1",
     "invoke>=2.2.0",
-    "ruff>=0.1.8",
+    "ruff>=0.5.0,<0.6.0"
 ]
 test = [
     "markdown>=3.4",
@@ -68,7 +67,7 @@ git-username = "botpub"
 git-email = "52496925+botpub@users.noreply.github.com"
 append-github-contributor = true
 
-[tool.ruff]
+[tool.ruff.lint]
 select = [
   "B",   # flake8-bugbear
   "BLE", # flake8-blind-except
@@ -100,9 +99,10 @@ ignore = [
   "D203",    # blank line before class docstring
   "D213",    # multi-line docstring summary should start at the second line
   "PLR0913", # too many arguments in function definition
+  "ISC001",  # disabled so `ruff format` works without warning
 ]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 combine-as-imports = true
 force-sort-within-sections = true
 known-first-party = ["pelican"]
