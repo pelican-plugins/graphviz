@@ -32,7 +32,7 @@ jobs:
         run: pdm install
 
       - name: Install system dependencies
-        run: sudo apt install graphviz
+        run: NEEDRESTART_MODE=l sudo apt install graphviz
 
       - name: Run tests
         run: pdm run invoke tests
