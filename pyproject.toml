@@ -39,9 +39,7 @@ dependencies = [
 [project.optional-dependencies]
 markdown = ["markdown>=3.4"]
 
-[tool.pdm]
-
-[tool.pdm.dev-dependencies]
+[dependency-groups]
 lint = [
     "invoke>=2.2.0",
     "ruff>=0.5.0,<0.6.0"
