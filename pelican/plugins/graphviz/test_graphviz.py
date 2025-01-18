@@ -224,12 +224,10 @@ class TestGraphvizAltTextWithoutID(TestGraphviz):
 
     def setUp(self):
         """Initialize the configuration."""
-        text = "fooo"
         TestGraphviz.setUp(
             self,
             digraph_id=None,
-            alt_text=text,
-            expected_alt_text=text,
+            alt_text="foo",
         )
 
     def test_output(self):
