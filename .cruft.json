@@ -1,0 +1,27 @@
+{
+  "template": "https://github.com/getpelican/cookiecutter-pelican-plugin",
+  "commit": "8a4f543e999c7a2b4ab49c724bf84ff4192f4c94",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "plugin_name": "Graphviz",
+      "repo_name": "graphviz",
+      "package_name": "graphviz",
+      "distribution_name": "pelican-graphviz",
+      "version": "1.2.5",
+      "description": "Pelican plugin supporting Graphviz images in articles",
+      "authors": "{name = \"Rafael Laboissière\", email = \"rafael@laboissiere.net\"}",
+      "keywords": "pelican, plugin, graphviz",
+      "readme": "README.md",
+      "contributing": "CONTRIBUTING.md",
+      "license": "GNU Affero General Public License v3|AGPL-3.0",
+      "repo_url": "https://github.com/pelican-plugins/graphviz",
+      "dev_status": "5 - Production/Stable",
+      "tests_exist": true,
+      "python_version": ">=3.8.1,<4.0",
+      "pelican_version": ">=4.5",
+      "_template": "https://github.com/getpelican/cookiecutter-pelican-plugin"
+    }
+  },
+  "directory": null
+}
