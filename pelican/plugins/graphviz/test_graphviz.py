@@ -93,17 +93,13 @@ class TestGraphviz(unittest.TestCase):
             fid.write(f"Title: {TEST_FILE_STEM}\nDate: 1970-01-01\n")
             # Write Graphviz block
             fid.write(
-                """
-{}{}dot
-digraph {} {{
+                f"""
+{block_start}{f" [{options}] " if options else " "}dot
+digraph {digraph_id if digraph_id else ""} {{
   graph [rankdir = LR];
   Hello -> World
 }}
-""".format(
-                    block_start,
-                    f" [{options}] " if options else " ",
-                    digraph_id if digraph_id else "",
-                )
+"""
             )
 
         # Run the Pelican instance
