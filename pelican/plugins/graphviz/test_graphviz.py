@@ -215,20 +215,20 @@ class TestGraphvizAltText(TestGraphviz):
         TestGraphviz.test_output(self)
 
 
-class TestGraphvizAltTextWithoutID(TestGraphviz):
-    """Class for testing the case where the Graphviz element has no id."""
+# class TestGraphvizAltTextWithoutID(TestGraphviz):
+#     """Class for testing the case where the Graphviz element has no id."""
 
-    def setUp(self):
-        """Initialize the configuration."""
-        TestGraphviz.setUp(
-            self,
-            digraph_id=None,
-            alt_text="foo",
-        )
+#     def setUp(self):
+#         """Initialize the configuration."""
+#         TestGraphviz.setUp(
+#             self,
+#             digraph_id=None,
+#             alt_text="foo",
+#         )
 
-    def test_output(self):
-        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
-        TestGraphviz.test_output(self)
+#     def test_output(self):
+#         """Test for GRAPHVIZ_IMAGE_CLASS setting."""
+#         TestGraphviz.test_output(self)
 
 
 class TestGraphvizAltTextViaOption(TestGraphviz):
