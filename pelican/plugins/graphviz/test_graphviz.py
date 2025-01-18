@@ -238,7 +238,7 @@ class TestGraphvizAltTextWithoutID(TestGraphviz):
 
 
 class TestGraphvizAltTextViaOption(TestGraphviz):
-    """Class for testing the case where the alternative text is given via the alt-text option."""
+    """Class for testing the alternative text given via the alt-text option."""
 
     def setUp(self):
         """Initialize the configuration."""
