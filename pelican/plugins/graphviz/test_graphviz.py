@@ -214,10 +214,13 @@ class TestGraphvizAltText(TestGraphviz):
         """Test for GRAPHVIZ_IMAGE_CLASS setting."""
         TestGraphviz.test_output(self)
 
-
+# This test is commented out because it fails in the GitHub action, even
+# though it works fine locally. For some strange reason, the alt property
+# is set to "%3", instead of "foo". This should be investigated further.
+#
 # class TestGraphvizAltTextWithoutID(TestGraphviz):
 #     """Class for testing the case where the Graphviz element has no id."""
-
+#
 #     def setUp(self):
 #         """Initialize the configuration."""
 #         TestGraphviz.setUp(
@@ -225,7 +228,7 @@ class TestGraphvizAltText(TestGraphviz):
 #             digraph_id=None,
 #             alt_text="foo",
 #         )
-
+#
 #     def test_output(self):
 #         """Test for GRAPHVIZ_IMAGE_CLASS setting."""
 #         TestGraphviz.test_output(self)
