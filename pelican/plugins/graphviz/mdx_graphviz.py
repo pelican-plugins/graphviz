@@ -48,7 +48,9 @@
 
 import base64
 import errno
+import os
 import re
+from subprocess import PIPE, Popen
 import xml.etree.ElementTree as ET
 
 from markdown import Extension
@@ -65,9 +67,6 @@ class DotRuntimeError(RuntimeError):
 
 def run_graphviz(program, code, options=None, format="png"):
     """Run graphviz program and returns image data."""
-    import os
-    from subprocess import PIPE, Popen
-
     if not options:
         options = []
 
