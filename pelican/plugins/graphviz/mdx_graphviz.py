@@ -183,7 +183,12 @@ class GraphvizProcessor(BlockProcessor):
                     r"<!-- Title: (.*) Pages: \d+ -->",
                     output.decode("utf-8"),
                 )
-                if m:
+                # Gating against a matched title of "%3" works around an old
+                # graphviz issue, which is still present in the version
+                # shipped with Ubuntu 24.04:
+                #
+                # https://gitlab.com/graphviz/graphviz/-/issues/1376
+                if m and m.group(1) != "%3":
                     img.set("alt", m.group(1))
                 else:
                     img.set("alt", config["alt-text-default"])
