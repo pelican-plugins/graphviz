@@ -19,9 +19,12 @@ import logging
 import os
 import subprocess
 
+from docutils.parsers.rst import directives
+
 from pelican import signals
 
 from .mdx_graphviz import GraphvizExtension
+from .rst_graphviz import make_graphviz_directive
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +54,8 @@ def initialize(pelicanobj):
         pelicanobj.settings["MARKDOWN"].setdefault("extensions", []).append(
             GraphvizExtension(config)
         )
+
+    directives.register_directive("graphviz", make_graphviz_directive(config))
 
 
 def register():
