@@ -162,6 +162,11 @@ Thanks to [weeheavy] for suggesting the addition of the `alt` property to the HT
 [weeheavy]: https://github.com/weeheavy
 [#30]: https://github.com/pelican-plugins/graphviz/issues/30
 
+Thanks to [Mark Shroyer][] for fixing lint issues and re-enabling the unit test `TestGraphvizAltTextWithoutID` (PR [#31]).
+
+[Mark Shroyer]: https://github.com/mshroyer
+[#31]: https://github.com/pelican-plugins/graphviz/pull/31
+
 
 Author
 ------
