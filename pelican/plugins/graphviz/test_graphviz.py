@@ -28,7 +28,10 @@ from . import graphviz
 
 TEST_FILE_STEM = "test"
 TEST_DIR_PREFIX = "pelicantests."
-GRAPHVIZ_RE = r'<{0} class="{1}"><img alt="{2}" src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
+GRAPHVIZ_RE = (
+    r'<{0} class="{1}"><img alt="{2}" '
+    r'src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
+)
 
 GRAPHVIZ_RE_XML = r'<svg width="\d+pt" height="\d+pt"'
 
@@ -214,24 +217,21 @@ class TestGraphvizAltText(TestGraphviz):
         """Test for GRAPHVIZ_IMAGE_CLASS setting."""
         TestGraphviz.test_output(self)
 
-# This test is commented out because it fails in the GitHub action, even
-# though it works fine locally. For some strange reason, the alt property
-# is set to "%3", instead of "foo". This should be investigated further.
-#
-# class TestGraphvizAltTextWithoutID(TestGraphviz):
-#     """Class for testing the case where the Graphviz element has no id."""
-#
-#     def setUp(self):
-#         """Initialize the configuration."""
-#         TestGraphviz.setUp(
-#             self,
-#             digraph_id=None,
-#             alt_text="foo",
-#         )
-#
-#     def test_output(self):
-#         """Test for GRAPHVIZ_IMAGE_CLASS setting."""
-#         TestGraphviz.test_output(self)
+
+class TestGraphvizAltTextWithoutID(TestGraphviz):
+    """Class for testing the case where the Graphviz element has no id."""
+
+    def setUp(self):
+        """Initialize the configuration."""
+        TestGraphviz.setUp(
+            self,
+            digraph_id=None,
+            alt_text="foo",
+        )
+
+    def test_output(self):
+        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
+        TestGraphviz.test_output(self)
 
 
 class TestGraphvizAltTextViaOption(TestGraphviz):
