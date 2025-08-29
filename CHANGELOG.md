@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+1.3.1 - 2025-08-29
+------------------
+
+* Fix lint issues and re-enable the unit test `TestGraphvizAltTextWithoutID` (thanks to Mark Shroyer, PR #31).
+
+* Fix license ID in `pyproject.toml` file.
+
 1.3.0 - 2025-01-18
 ------------------
 
