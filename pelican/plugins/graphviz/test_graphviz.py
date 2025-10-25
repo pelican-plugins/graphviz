@@ -148,10 +148,6 @@ class TestGraphvizHtmlElement(TestGraphviz):
         """Initialize the configuration."""
         TestGraphviz.setUp(self, html_element="span")
 
-    def test_output(self):
-        """Test for GRAPHVIZ_HTML_ELEMENT setting."""
-        TestGraphviz.test_output(self)
-
 
 class TestGraphvizBlockStart(TestGraphviz):
     """Class for exercising the configuration variable GRAPHVIZ_BLOCK_START."""
@@ -159,10 +155,6 @@ class TestGraphvizBlockStart(TestGraphviz):
     def setUp(self):
         """Initialize the configuration."""
         TestGraphviz.setUp(self, block_start="==foobar")
-
-    def test_output(self):
-        """Test for GRAPHVIZ_BLOCK_START setting."""
-        TestGraphviz.test_output(self)
 
 
 class TestGraphvizImageClass(TestGraphviz):
@@ -172,10 +164,6 @@ class TestGraphvizImageClass(TestGraphviz):
         """Initialize the configuration."""
         TestGraphviz.setUp(self, image_class="foo")
 
-    def test_output(self):
-        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
-        TestGraphviz.test_output(self)
-
 
 class TestGraphvizImageNoCompress(TestGraphviz):
     """Class for exercising configuration variable GRAPHVIZ_COMPRESS."""
@@ -183,10 +171,6 @@ class TestGraphvizImageNoCompress(TestGraphviz):
     def setUp(self):
         """Initialize the configuration."""
         TestGraphviz.setUp(self, compress=False)
-
-    def test_output(self):
-        """Test for GRAPHVIZ_COMPRESS setting."""
-        TestGraphviz.test_output(self)
 
 
 class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
@@ -201,10 +185,6 @@ class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
             expected_html_element="span",
         )
 
-    def test_output(self):
-        """Test for overrind the configuration."""
-        TestGraphviz.test_output(self)
-
 
 class TestGraphvizAltText(TestGraphviz):
     """Class for exercising configuration variable GRAPHVIZ_ALT_TEXT."""
@@ -212,10 +192,6 @@ class TestGraphvizAltText(TestGraphviz):
     def setUp(self):
         """Initialize the configuration."""
         TestGraphviz.setUp(self, alt_text="foo")
-
-    def test_output(self):
-        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
-        TestGraphviz.test_output(self)
 
 
 class TestGraphvizAltTextWithoutID(TestGraphviz):
@@ -229,10 +205,6 @@ class TestGraphvizAltTextWithoutID(TestGraphviz):
             alt_text="foo",
         )
 
-    def test_output(self):
-        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
-        TestGraphviz.test_output(self)
-
 
 class TestGraphvizAltTextViaOption(TestGraphviz):
     """Class for testing the alternative text given via the alt-text option."""
@@ -245,7 +217,3 @@ class TestGraphvizAltTextViaOption(TestGraphviz):
             options=f'alt-text="{text}"',
             expected_alt_text=text,
         )
-
-    def test_output(self):
-        """Test for GRAPHVIZ_IMAGE_CLASS setting."""
-        TestGraphviz.test_output(self)
