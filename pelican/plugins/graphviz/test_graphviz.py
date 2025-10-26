@@ -96,6 +96,33 @@ digraph{f" {self.input_digraph_id}" if self.input_digraph_id else ""} {{
         self.run_pelican()
         self.assert_expected_output()
 
+    def test_rst(self):
+        options_string = ""
+        if self.input_options:
+            options_string = "\n".join(
+                f"   :{k}: {v}" for k, v in self.input_options.items()
+            )
+
+        with open(os.path.join(self.content_path, f"{TEST_FILE_STEM}.rst"), "w") as fid:
+            rst_input = f"""\
+{TEST_FILE_STEM}
+################
+:date: 1970-01-01
+:slug: {TEST_FILE_STEM}
+
+.. graphviz:: dot
+{options_string}
+
+   digraph{f" {self.input_digraph_id}" if self.input_digraph_id else ""} {{
+     graph [rankdir = LR];
+     Hello -> World
+   }}
+"""
+            fid.write(rst_input)
+
+        self.run_pelican()
+        self.assert_expected_output()
+
     def run_pelican(self):
         settings = read_settings(override=self.settings)
         pelican = Pelican(settings=settings)
@@ -143,7 +170,13 @@ class TestGraphvizHtmlElement(TestGraphviz):
 
 
 class TestGraphvizBlockStart(TestGraphviz):
-    """Class for exercising the configuration variable GRAPHVIZ_BLOCK_START."""
+    """Class for exercising the configuration variable GRAPHVIZ_BLOCK_START.
+
+    Because the reStructredText implementation does not allow configuring the
+    directive name using GRAPHVIZ_BLOCK_START, test_rst() is essentially a
+    no-op for this test case.
+
+    """
 
     def setUp(self):
         """Initialize the configuration."""
