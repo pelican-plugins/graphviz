@@ -21,6 +21,8 @@ from shutil import rmtree
 from tempfile import mkdtemp
 import unittest
 
+from bs4 import BeautifulSoup, Tag
+
 from pelican import Pelican
 from pelican.settings import read_settings
 
@@ -28,12 +30,7 @@ from . import graphviz
 
 TEST_FILE_STEM = "test"
 TEST_DIR_PREFIX = "pelicantests."
-GRAPHVIZ_RE = (
-    r'<{0} class="{1}"><img alt="{2}" '
-    r'src="data:image/svg\+xml;base64,[0-9a-zA-Z+=]+"></{0}>'
-)
-
-GRAPHVIZ_RE_XML = r'<svg width="\d+pt" height="\d+pt"'
+DIMENSION_ATTR_RE = re.compile(r"\d+pt")
 
 
 class TestGraphviz(unittest.TestCase):
@@ -108,26 +105,25 @@ digraph{f" {self.input_digraph_id}" if self.input_digraph_id else ""} {{
         """Test for default values of the configuration variables."""
         # Open the output HTML file
         with open(os.path.join(self.output_path, f"{TEST_FILE_STEM}.html")) as fid:
+            # Keep content as a string so we can see full content in output
+            # from failed asserts.
             content = fid.read()
-            found = False
-            # Iterate over the lines and look for the HTML element corresponding
-            # to the generated Graphviz figure
-            for line in content.splitlines():
-                if self.expected_compressed:
-                    if re.search(
-                        GRAPHVIZ_RE.format(
-                            self.expected_html_element,
-                            self.expected_image_class,
-                            self.expected_alt_text,
-                        ),
-                        line,
-                    ):
-                        found = True
-                        break
-                elif re.search(GRAPHVIZ_RE_XML, line):
-                    found = True
-                    break
-            assert found, content
+            soup = BeautifulSoup(content, "html.parser")
+            if self.expected_compressed:
+                elt = soup.find(
+                    self.expected_html_element, class_=self.expected_image_class
+                )
+                assert isinstance(elt, Tag), content
+
+                img = elt.find("img", attrs={"alt": self.expected_alt_text})
+                assert img is not None, content
+            else:
+                svg = soup.find("svg")
+                assert isinstance(svg, Tag), content
+
+                for attr in ["width", "height"]:
+                    assert attr in svg.attrs
+                    assert DIMENSION_ATTR_RE.fullmatch(str(svg.attrs[attr]))
 
     def tearDown(self):
         """Tidy up the test environment."""
