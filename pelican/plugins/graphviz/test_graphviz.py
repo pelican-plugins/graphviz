@@ -55,6 +55,11 @@ class TestGraphviz(unittest.TestCase):
         self.output_path = mkdtemp(prefix=TEST_DIR_PREFIX)
         self.content_path = mkdtemp(prefix=TEST_DIR_PREFIX)
 
+        # Save input
+        self.input_md_block_start = input_md_block_start
+        self.input_options = input_options
+        self.input_digraph_id = input_digraph_id
+
         # Save expected output
         self.expected_compressed = expected_compressed
         self.expected_html_element = expected_html_element
@@ -71,9 +76,10 @@ class TestGraphviz(unittest.TestCase):
         if settings is not None:
             self.settings.update(settings)
 
+    def test_md(self):
         options_string = ""
-        if input_options:
-            kvs = ",".join(f'{k}="{v}"' for k, v in input_options.items())
+        if self.input_options:
+            kvs = ",".join(f'{k}="{v}"' for k, v in self.input_options.items())
             options_string = f"[{kvs}]"
 
         # Create the article file
@@ -82,24 +88,23 @@ class TestGraphviz(unittest.TestCase):
             fid.write(f"Title: {TEST_FILE_STEM}\nDate: 1970-01-01\n")
             # Write Graphviz block
             md_input = f"""
-{input_md_block_start} {options_string} dot
-digraph{f" {input_digraph_id}" if input_digraph_id else ""} {{
+{self.input_md_block_start} {options_string} dot
+digraph{f" {self.input_digraph_id}" if self.input_digraph_id else ""} {{
   graph [rankdir = LR];
   Hello -> World
 }}
 """
             fid.write(md_input)
 
+        self.run_pelican()
+        self.assert_expected_output()
+
+    def run_pelican(self):
         settings = read_settings(override=self.settings)
         pelican = Pelican(settings=settings)
         pelican.run()
 
-    def tearDown(self):
-        """Tidy up the test environment."""
-        rmtree(self.output_path)
-        rmtree(self.content_path)
-
-    def test_output(self):
+    def assert_expected_output(self):
         """Test for default values of the configuration variables."""
         # Open the output HTML file
         with open(os.path.join(self.output_path, f"{TEST_FILE_STEM}.html")) as fid:
@@ -123,6 +128,11 @@ digraph{f" {input_digraph_id}" if input_digraph_id else ""} {{
                     found = True
                     break
             assert found, content
+
+    def tearDown(self):
+        """Tidy up the test environment."""
+        rmtree(self.output_path)
+        rmtree(self.content_path)
 
 
 class TestGraphvizHtmlElement(TestGraphviz):
