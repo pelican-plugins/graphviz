@@ -25,14 +25,6 @@ from markdown.blockprocessors import BlockProcessor
 from .run_graphviz import run_graphviz
 
 
-class DotRuntimeError(RuntimeError):
-    """Exception for dot program."""
-
-    def __init__(self, errmsg):
-        """Emit the error message."""
-        super().__init__(f"dot exited with error:\n[stderr]\n{errmsg}")
-
-
 class GraphvizProcessor(BlockProcessor):
     """Block processor for the Graphviz Markdown Extension."""
 
