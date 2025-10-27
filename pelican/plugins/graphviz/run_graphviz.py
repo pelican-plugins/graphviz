@@ -46,9 +46,12 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import base64
 import errno
 import os
+import re
 from subprocess import PIPE, Popen
+import xml.etree.ElementTree as ET
 
 
 class DotRuntimeError(RuntimeError):
@@ -57,6 +60,37 @@ class DotRuntimeError(RuntimeError):
     def __init__(self, errmsg):
         """Emit the error message."""
         super().__init__(f"dot exited with error:\n[stderr]\n{errmsg}")
+
+
+def append_compressed_img(config, svg_output, elt):
+    """Apppend a compressed svg img element to an elementtree."""
+    img = ET.SubElement(elt, "img")
+    img.set(
+        "src",
+        "data:image/svg+xml;base64,{}".format(
+            base64.b64encode(svg_output).decode("ascii")
+        ),
+    )
+    # Set the alt text. Order of priority:
+    #    1. Block option alt-text
+    #    2. ID of Graphviz object
+    #    3. Global GRAPHVIZ_ALT_TEXT option
+    if config["alt-text"]:
+        img.set("alt", config["alt-text"])
+    else:
+        m = re.search(
+            r"<!-- Title: (.*) Pages: \d+ -->",
+            svg_output.decode("utf-8"),
+        )
+        # Gating against a matched title of "%3" works around an old
+        # graphviz issue, which is still present in the version
+        # shipped with Ubuntu 24.04:
+        #
+        # https://gitlab.com/graphviz/graphviz/-/issues/1376
+        if m and m.group(1) != "%3":
+            img.set("alt", m.group(1))
+        else:
+            img.set("alt", config["alt-text-default"])
 
 
 def run_graphviz(program, code, options=None, format="png"):
