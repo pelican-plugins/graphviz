@@ -15,14 +15,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see http://www.gnu.org/licenses/.
 
-import base64
 import re
 import xml.etree.ElementTree as ET
 
 from markdown import Extension
 from markdown.blockprocessors import BlockProcessor
 
-from .run_graphviz import run_graphviz
+from .run_graphviz import append_base64_img, run_graphviz
 
 
 class GraphvizProcessor(BlockProcessor):
@@ -79,33 +78,7 @@ class GraphvizProcessor(BlockProcessor):
 
         # Cope with compression
         if config["compress"]:
-            img = ET.SubElement(elt, "img")
-            img.set(
-                "src",
-                "data:image/svg+xml;base64,{}".format(
-                    base64.b64encode(output).decode("ascii")
-                ),
-            )
-            # Set the alt text. Order of priority:
-            #    1. Block option alt-text
-            #    2. ID of Graphviz object
-            #    3. Global GRAPHVIZ_ALT_TEXT option
-            if config["alt-text"]:
-                img.set("alt", config["alt-text"])
-            else:
-                m = re.search(
-                    r"<!-- Title: (.*) Pages: \d+ -->",
-                    output.decode("utf-8"),
-                )
-                # Gating against a matched title of "%3" works around an old
-                # graphviz issue, which is still present in the version
-                # shipped with Ubuntu 24.04:
-                #
-                # https://gitlab.com/graphviz/graphviz/-/issues/1376
-                if m and m.group(1) != "%3":
-                    img.set("alt", m.group(1))
-                else:
-                    img.set("alt", config["alt-text-default"])
+            append_base64_img(output, config, elt)
         else:
             svg = output.decode()
             start = svg.find("<svg")
