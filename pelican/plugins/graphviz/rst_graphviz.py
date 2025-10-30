@@ -1,6 +1,6 @@
 """reStructuredText extension for the Graphviz plugin for Pelican."""
 
-# Copyright (C) 2015, 2021, 2023, 2025  Rafael Laboissière <rafael@laboissiere.net>
+# Copyright (C) 2025  Mark Shroyer <mark@shroyer.name>
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Affero Public License as published by
