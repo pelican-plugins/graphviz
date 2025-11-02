@@ -94,22 +94,21 @@ Configuration
 
 The following variables can be set in the Pelican settings file:
 
+- `GRAPHVIZ_BLOCK_START`: Starting tag for the Graphviz block in Markdown (defaults to `'..graphviz'`). This setting has no effect for reStructuredText input.
+
 - `GRAPHVIZ_HTML_ELEMENT`: The HTML element inside which the generated Graphviz image is inserted (defaults to `'div'`; another sensible possibility would be `'span'`).
 
 - `GRAPHVIZ_IMAGE_CLASS`: The class of the `<div>` element including the generated Graphviz image (defaults to `'graphviz'`).
-
-- `GRAPHVIZ_BLOCK_START`: Starting tag for the Graphviz block in Markdown (defaults to `'..graphviz'`).  This setting has no effect for reStructuredText input.
 
 - `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance including clickable URLs inside the Graphviz diagram.
 
 - `GRAPHVIZ_ALT_TEXT`: The string that will be used as the default value for the `alt` property of the generated `<img>` HTML element (defaults to `"[GRAPH]"`). It is only meaningful when the resulting SVG output is compressed.
 
-The values above can be overridden for each individual block using the syntax below. In Markdown, this looks like:
+The values for all variables above, except `GRAPHVIZ_BLOCK_START`, can be overridden for each individual block using the following syntax, in Markdown:
 
 ```markdown
 ..graphviz [key1=val1, key2="val2"...] dot
 ```
-
 If the value needs to include a comma (`,`) or an equal sign (`=`), then use the `key2="val2"` form.
 
 Or in reStructuredText:
@@ -120,8 +119,7 @@ Or in reStructuredText:
    :key2: val2
 ```
 
-The allowed keys are `html-element`, `image-class`, `block-start`, `alt-text`, and `compress`. For the latter, the value can be either `yes` or `no`.  `block-start` has no effect for reStructuredText.
-
+The allowed keys are `html-element`, `image-class`, `alt-text`, and `compress`. For the latter, the value can be either `yes` or `no`.
 
 Output Image Format
 -------------------
