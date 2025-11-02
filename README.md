@@ -94,7 +94,7 @@ Configuration
 
 The following variables can be set in the Pelican settings file:
 
-- `GRAPHVIZ_HTML_ELEMENT`: The HTML inside which the generated Graphviz image is inserted (defaults to `'div'`; another sensible possibility would be `'span'`).
+- `GRAPHVIZ_HTML_ELEMENT`: The HTML element inside which the generated Graphviz image is inserted (defaults to `'div'`; another sensible possibility would be `'span'`).
 
 - `GRAPHVIZ_IMAGE_CLASS`: Class of the `<div>` element including the generated Graphviz image (defaults to `'graphviz'`).
 
@@ -102,7 +102,7 @@ The following variables can be set in the Pelican settings file:
 
 - `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance including clickable URLs inside the Graphviz diagram.
 
-- `GRAPHVIZ_ALT_TEXT`: String that will be used as the default value for the `alt` property of the generated `<img>` HTML element (defaults to `"[GRAPH]"`). It is only meaningful when the reuslting SVG output is compressed.
+- `GRAPHVIZ_ALT_TEXT`: String that will be used as the default value for the `alt` property of the generated `<img>` HTML element (defaults to `"[GRAPH]"`). It is only meaningful when the resulting SVG output is compressed.
 
 The values above can be overridden for each individual block using the syntax below. In Markdown, this looks like:
 
@@ -132,7 +132,7 @@ The format of the embedded image is SVG, and there is currently no way to change
 Text alternative for the image
 ------------------------------
 
-When generating compressed SVG images (the default), an `<img>` element will appear in the HTML output. According to the [Web Content Accessibility Guidelines], non-text content, like `<img>` elements, should have an text alternative. The graphviz plugin complies with this recommendation and always generate a `alt` property for the generated `<img>` element. The value of the `alt` property will be, in order of priority:
+When generating compressed SVG images (the default), an `<img>` element will appear in the HTML output. According to the [Web Content Accessibility Guidelines], non-text content, like `<img>` elements, should have an text alternative. The graphviz plugin complies with this recommendation and always generate an `alt` property for the generated `<img>` element. The value of the `alt` property will be, in order of priority:
 
 1. The value of the Graphviz block option `alt-text`,
 2. the ID of the Graphviz element (`"G"` in the example above), or
