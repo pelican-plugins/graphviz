@@ -6,7 +6,7 @@ Graphviz: A Plugin for Pelican
 [![Downloads](https://img.shields.io/pypi/dm/pelican-graphviz)](https://pypi.org/project/pelican-graphviz/)
 [![License](https://img.shields.io/pypi/l/pelican-graphviz?color=blue)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
-Graphviz is a Pelican plugin that allows the inclusion of [Graphviz][] images using the Markdown or reStructuredText markup format. The code for the Graphviz figure is included as a block in the article’s source. In the output HTML file, the Graphviz figure can appear as either a `<svg>` or embedded into a `<img>` element using the Base64 format.
+Graphviz is a Pelican plugin that allows the inclusion of [Graphviz][] images using the Markdown or reStructuredText markup format. The code for the Graphviz figure is included as a block in the article’s source. In the output HTML file, the Graphviz figure can appear as either a `<svg>` or embedded in a `<img>` element using the Base64 format.
 
 [Graphviz]: https://www.graphviz.org
 
@@ -44,11 +44,11 @@ digraph G {
 }
 ```
 
-This will insert an image in your article like this:
+This will insert an image into your article like this:
 
 ![figure](https://github.com/pelican-plugins/graphviz/raw/main/hello-world.png)
 
-The block must start with `..graphviz` (this is configurable — see below). The word `dot` in the first line indicates the program that will be run to produce the image. The available programs are: `dot`, `neato`, `twopi`, `circo`, `fdp`, `sfdp`, and `patchwork` (see the [Graphviz documentation][] for details). The Graphviz code must start in the second line of the block. Notice that *newlines are not allowed inside the Graphviz block*.
+The block must start with `..graphviz` (this is configurable — see below). The word `dot` in the first line indicates the program that will be run to produce the image. The available programs are: `dot`, `neato`, `twopi`, `circo`, `fdp`, `sfdp`, and `patchwork` (see the [Graphviz documentation][] for details). The Graphviz code must start on the second line of the block. Notice that *newlines are not allowed inside the Graphviz block*.
 
 [Graphviz documentation]: https://www.graphviz.org/documentation/
 
@@ -69,7 +69,7 @@ For RST input, support is implemented as a directive, with syntax like:
 Styling with CSS
 ----------------
 
-The image is generated in HTML with an `<img>` element inside an HTML element (by default a `<div>`, but this is configurable — see below). The latter has class `graphviz` (this is also configurable — see below). A possible CSS styling would be:
+The image is generated in HTML with an `<img>` element inside an HTML element (by default a `<div>`, but this is configurable — see below). The latter has class `graphviz` (this is also configurable — see below). One possible CSS styling would be:
 
 ```css
 div.graphviz  {
@@ -96,13 +96,13 @@ The following variables can be set in the Pelican settings file:
 
 - `GRAPHVIZ_HTML_ELEMENT`: The HTML element inside which the generated Graphviz image is inserted (defaults to `'div'`; another sensible possibility would be `'span'`).
 
-- `GRAPHVIZ_IMAGE_CLASS`: Class of the `<div>` element including the generated Graphviz image (defaults to `'graphviz'`).
+- `GRAPHVIZ_IMAGE_CLASS`: The class of the `<div>` element including the generated Graphviz image (defaults to `'graphviz'`).
 
 - `GRAPHVIZ_BLOCK_START`: Starting tag for the Graphviz block in Markdown (defaults to `'..graphviz'`).  This setting has no effect for reStructuredText input.
 
 - `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance including clickable URLs inside the Graphviz diagram.
 
-- `GRAPHVIZ_ALT_TEXT`: String that will be used as the default value for the `alt` property of the generated `<img>` HTML element (defaults to `"[GRAPH]"`). It is only meaningful when the resulting SVG output is compressed.
+- `GRAPHVIZ_ALT_TEXT`: The string that will be used as the default value for the `alt` property of the generated `<img>` HTML element (defaults to `"[GRAPH]"`). It is only meaningful when the resulting SVG output is compressed.
 
 The values above can be overridden for each individual block using the syntax below. In Markdown, this looks like:
 
