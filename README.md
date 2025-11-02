@@ -6,7 +6,7 @@ Graphviz: A Plugin for Pelican
 [![Downloads](https://img.shields.io/pypi/dm/pelican-graphviz)](https://pypi.org/project/pelican-graphviz/)
 [![License](https://img.shields.io/pypi/l/pelican-graphviz?color=blue)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
-Graphviz is a Pelican plugin that allows the inclusion of [Graphviz][] images using the Markdown or reStructuredText markup format. The code for the Graphviz figure is included as a block in the article’s source. In the output HTML file, the Graphviz figure can appear as either a `<svg>` or embedded in a `<img>` element using the Base64 format.
+Graphviz is a Pelican plugin enables [Graphviz][] images to be included using the Markdown or reStructuredText markup format. The Graphviz code for the image is included as a block in the article’s source. In the HTML output file, the Graphviz image can appear as either a `<svg>` element or embedded in an `<img>` element using the Base64 format.
 
 [Graphviz]: https://www.graphviz.org
 
@@ -18,9 +18,9 @@ This plugin can be installed via:
 
     python -m pip install pelican-graphviz
 
-As long as you have not explicitly added a `PLUGINS` setting to your Pelican settings file, then the newly-installed plugin should be automatically detected and enabled. Otherwise, you must add `graphviz` to your existing `PLUGINS` list. For more information, please see the [How to Use Plugins](https://docs.getpelican.com/en/latest/plugins.html#how-to-use-plugins) documentation.
+The newly installed plugin should be detected and enabled automatically, unless the `PLUGINS` variable is used in the Pelican settings file. In this case, `"graphviz"` must be added to the existing `PLUGINS` list. Further information can be found in the [How to Use Plugins](https://docs.getpelican.com/en/latest/plugins.html#how-to-use-plugins) documentation.
 
-Graphviz must be installed on the system, otherwise this plugin will be deactivated. Graphviz can be installed on Debian-based systems via:
+This plugin will be deactivated if Graphviz is not installed on the system. On Debian-based systems, Graphviz can be installed via:
 
     sudo aptitude install graphviz
 
@@ -34,7 +34,7 @@ Usage
 
 ### Markdown
 
-In the Markdown source, the Graphviz code must be inserted as an individual block (i.e., separated from the rest of the material by blank lines), An example is shown below:
+In the Markdown source, the Graphviz code should be inserted as a separate block, i.e. with blank lines separating it from the surrounding text. An example is shown below:
 
 ```markdown
 ..graphviz dot
@@ -48,7 +48,7 @@ This will insert an image into your article, as shown here:
 
 ![figure](https://github.com/pelican-plugins/graphviz/raw/main/hello-world.png)
 
-The block must start with `..graphviz` (this is configurable — see below). The word `dot` in the first line indicates the program that will be run to produce the image. The available programs are: `dot`, `neato`, `twopi`, `circo`, `fdp`, `sfdp`, and `patchwork` (see the [Graphviz documentation][] for details). The Graphviz code must start on the second line of the block. Notice that *newlines are not allowed inside the Graphviz block*.
+The block must start with `..graphviz` (this is configurable — see below). The word `dot` in the first line indicates which program will be used to produce the image. The available programs are: `dot`, `neato`, `twopi`, `circo`, `fdp`, `sfdp`, and `patchwork` (see the [Graphviz documentation][] for details). The Graphviz code must start on the second line of the block. Please note that *newlines are not allowed inside the Graphviz block*.
 
 [Graphviz documentation]: https://www.graphviz.org/documentation/
 
@@ -69,7 +69,7 @@ For RST input, support is implemented as a directive, with syntax like:
 Styling with CSS
 ----------------
 
-The image is generated in HTML with an `<img>` element inside an HTML element (by default a `<div>`, but this is configurable — see below). The latter has class `graphviz` (this is also configurable — see below). One possible CSS styling would be:
+The image is generated in HTML using an `<img>` element inside an HTML element (by default a `<div>`, but this can be configured — see below). The latter has the class `graphviz` (this is also configurable — see below). One possible CSS styling would be:
 
 ```css
 div.graphviz  {
@@ -92,24 +92,24 @@ div.graphviz img {
 Configuration
 -------------
 
-The following variables can be set in the Pelican settings file:
+The following variables can be configured in the Pelican settings file:
 
 - `GRAPHVIZ_BLOCK_START`: Starting tag for the Graphviz block in Markdown (defaults to `'..graphviz'`). This setting has no effect for reStructuredText input.
 
-- `GRAPHVIZ_HTML_ELEMENT`: The HTML element inside which the generated Graphviz image is inserted (defaults to `'div'`; another sensible possibility would be `'span'`).
+- `GRAPHVIZ_HTML_ELEMENT`: The HTML element inside which the generated Graphviz image is inserted (defaults to `'div'`; another sensible option would be `'span'`).
 
-- `GRAPHVIZ_IMAGE_CLASS`: The class of the `<div>` element including the generated Graphviz image (defaults to `'graphviz'`).
+- `GRAPHVIZ_IMAGE_CLASS`: The class of the `<div>` element containing the generated Graphviz image (defaults to `'graphviz'`).
 
-- `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance including clickable URLs inside the Graphviz diagram.
+- `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance the inclusion of clickable URLs inside the Graphviz diagram.
 
 - `GRAPHVIZ_ALT_TEXT`: The string that will be used as the default value for the `alt` property of the generated `<img>` HTML element (defaults to `"[GRAPH]"`). It is only meaningful when the resulting SVG output is compressed.
 
-The values for all variables above, except `GRAPHVIZ_BLOCK_START`, can be overridden for each individual block using the following syntax, in Markdown:
+The values for all variables above, except `GRAPHVIZ_BLOCK_START`, can be overridden for each block individually using the following syntax in Markdown:
 
 ```markdown
 ..graphviz [key1=val1, key2="val2"...] dot
 ```
-If the value needs to include a comma (`,`) or an equal sign (`=`), then use the `key2="val2"` form.
+If the value includes a comma (`,`) or an equal sign (`=`), then use the `key2="val2"` form.
 
 Or in reStructuredText:
 
@@ -124,7 +124,7 @@ The allowed keys are `html-element`, `image-class`, `alt-text`, and `compress`. 
 Output Image Format
 -------------------
 
-The format of the embedded image is SVG, and there is currently no way to change it. This format was chosen over others (such as PNG) for two reasons. First, the generated SRC string in Base64 seem to be shorter for SVG than for PNG. Second, the image will be available in the browser in a high-quality vectorized format. As a caveat, notice that this choice may prevent display in browsers lacking proper SVG support.
+The embedded image is in SVG format, and cannot currently be changed. This format was chosen over others, such as PNG, for two reasons. First, the generated Base64 `src` string is usually shorter shorter for SVG than for PNG. Second, the image will be available in a high-quality vectorized format when displayed in the browser. However, note that this choice may prevent display in browsers lacking proper SVG support.
 
 
 Text alternative for the image
@@ -142,10 +142,10 @@ When generating compressed SVG images (the default), an `<img>` element will app
 Alternatives
 ------------
 
-An alternative to this plugin is the [Graphviz tag][] provided by the [Liquid Tags plugin][], which differs from this plugin in several respects. First, the Liquid Tags version uses the syntax `{% graphviz { <program> […] } %}`, while the graphviz plugin uses the Markdown extension syntax `..graphviz <program> […]`. Regarding the rendered output, the differences are:
+An alternative to this plugin is the [Graphviz tag][] provided by the [Liquid Tags plugin][], which differs from this plugin in several respects. First, the Liquid Tags version uses the syntax `{% graphviz { <program> […] } %}`, while the graphviz plugin uses the Markdown extension syntax `..graphviz <program> […]`. The differences in the rendered output are:
 
-- Both plugins output an element with `class="graphviz"`. However, only the graphviz plugin allows you to change the class name via a configuration variable (`GRAPHVIZ_IMAGE_CLASS`).
-- Liquid Tags encodes the image as `src="data:image/png;base64,[…]"`, while the graphviz plugin encodes it as `src="data:image/svg+xml;base64,[…]"`. This has two impacts. First, the size of the HTML code produced by the graphviz plugin is much smaller. For example, the Base64 string for the graphviz code `digraph graphname {a -> b -> c; b -> d;}` is four times smaller. Second, the Liquid Tags version generates a raster image file, whereas the graphviz plugin produces a vector image that can be zoomed without image quality loss.
+- Both plugins output an element with the attribute `class="graphviz"`. However, only the graphviz plugin allows you to change the class name via a configuration variable (`GRAPHVIZ_IMAGE_CLASS`).
+- Liquid Tags encodes the image as `src="data:image/png;base64,[…]"`, whereas the graphviz plugin encodes it as `src="data:image/svg+xml;base64,[…]"`. This has two impacts. First, the size of the HTML code produced by the graphviz plugin is much smaller. For example, the Base64 string for the graphviz code `digraph graphname {a -> b -> c; b -> d;}` is four times smaller. Second, the Liquid Tags version generates a raster image file, whereas the graphviz plugin produces a vector image that can be zoomed in on without losing image quality.
 - Liquid Tags outputs the Graphviz image inside a `<span>`, whereas the graphviz plugin offers a choice for the container element.
 
 [Graphviz tag]: https://github.com/pelican-plugins/liquid-tags/blob/main/pelican/plugins/liquid_tags/graphviz.py
@@ -155,7 +155,7 @@ An alternative to this plugin is the [Graphviz tag][] provided by the [Liquid Ta
 Contributing
 ------------
 
-Contributions are welcome and much appreciated. Every little bit helps. You can contribute by improving the documentation, adding missing features, and fixing bugs. You can also help out by reviewing and commenting on [existing issues][].
+Contributions are welcome and greatly appreciated. Every little bit helps. You can contribute by improving the documentation, adding missing features, and fixing bugs. You can also help out by reviewing and commenting on [existing issues][].
 
 To start contributing to this plugin, review the [Contributing to Pelican][] documentation, beginning with the **Contributing Code** section.
 
