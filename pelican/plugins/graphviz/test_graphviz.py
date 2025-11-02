@@ -151,9 +151,10 @@ class TestGraphvizBlockStart(TestGraphviz):
 
     def setUp(self):
         """Initialize the configuration."""
+        value = "==foobar"
         super().setUp(
-            config={"md_block_start": "==foobar"},
-            settings={"GRAPHVIZ_BLOCK_START": "==foobar"},
+            config={"md_block_start": value},
+            settings={"GRAPHVIZ_BLOCK_START": value},
         )
 
 
