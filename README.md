@@ -142,11 +142,11 @@ When generating compressed SVG images (the default), an `<img>` element will app
 Alternatives
 ------------
 
-An alternative to this plugin is the [Graphviz tag][] provided by the [Liquid Tags plugin][], which differs from this plugin in several respects. First, the Liquid Tags version uses the syntax `{% graphviz { <program> […] } %}`, while this Graphviz plugin uses the Markdown extension syntax `..graphviz <program> […]`. Regarding the rendered output, the differences are:
+An alternative to this plugin is the [Graphviz tag][] provided by the [Liquid Tags plugin][], which differs from this plugin in several respects. First, the Liquid Tags version uses the syntax `{% graphviz { <program> […] } %}`, while the graphviz plugin uses the Markdown extension syntax `..graphviz <program> […]`. Regarding the rendered output, the differences are:
 
-- Both plugins output an element with `class="graphviz"`. However, only the Graphviz plugin allows you to change the class name via a configuration variable (`GRAPHVIZ_IMAGE_CLASS`).
-- Liquid Tags encodes the image as `src="data:image/png;base64,[…]"`, while the Graphviz plugin encodes it as `src="data:image/svg+xml;base64,[…]"`. This has two impacts. First, the size of the HTML code produced by this Graphviz plugin is much smaller. For example, the Base64 string for the Graphviz code `digraph graphname {a -> b -> c; b -> d;}` is four times smaller. Second, the Liquid Tags version generates a raster image file, whereas this Graphviz plugin produces a vector image that can be zoomed without image quality loss.
-- Liquid Tags outputs the Graphviz image inside a `<span>`, whereas this Graphviz plugin offers a choice for the container element.
+- Both plugins output an element with `class="graphviz"`. However, only the graphviz plugin allows you to change the class name via a configuration variable (`GRAPHVIZ_IMAGE_CLASS`).
+- Liquid Tags encodes the image as `src="data:image/png;base64,[…]"`, while the graphviz plugin encodes it as `src="data:image/svg+xml;base64,[…]"`. This has two impacts. First, the size of the HTML code produced by the graphviz plugin is much smaller. For example, the Base64 string for the graphviz code `digraph graphname {a -> b -> c; b -> d;}` is four times smaller. Second, the Liquid Tags version generates a raster image file, whereas the graphviz plugin produces a vector image that can be zoomed without image quality loss.
+- Liquid Tags outputs the Graphviz image inside a `<span>`, whereas the graphviz plugin offers a choice for the container element.
 
 [Graphviz tag]: https://github.com/pelican-plugins/liquid-tags/blob/main/pelican/plugins/liquid_tags/graphviz.py
 [Liquid Tags plugin]: https://github.com/pelican-plugins/liquid-tags
