@@ -187,7 +187,7 @@ Thanks to [Mark Shroyer][] for fixing lint issues, re-enabling the unit test `Te
 Authors
 -------
 
-Copyright © 2015, 2021, 2023–2026  Rafael Laboissière <rafael@laboissiere.net>
+Copyright © 2015, 2021, 2023–2025  Rafael Laboissière <rafael@laboissiere.net>
 
 Copyright © 2025  Mark Shroyer <mark@shroyer.name>
 
