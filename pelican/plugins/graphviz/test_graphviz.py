@@ -1,6 +1,7 @@
 """Unit testing suite for the Graphviz plugin."""
 
 # Copyright (C) 2015, 2021, 2023, 2025  Rafael Laboissière <rafael@laboissiere.net>
+# Copyright (C) 2025  Mark Shroyer <mark@shroyer.name>
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Affero Public License as published by
@@ -38,32 +39,25 @@ class TestGraphviz(unittest.TestCase):
 
     def setUp(
         self,
-        input_md_block_start="..graphviz",
-        input_options=None,
-        input_digraph_id="G",
+        config=None,
         settings=None,
-        expected_compressed=True,
-        expected_html_element="div",
-        expected_image_class="graphviz",
-        expected_alt_text="G",
+        expected=None,
     ):
         """Set up the test environment."""
         # Set the paths for the input (content) and output (html) files
         self.output_path = mkdtemp(prefix=TEST_DIR_PREFIX)
         self.content_path = mkdtemp(prefix=TEST_DIR_PREFIX)
 
-        # Save input
-        self.input_md_block_start = input_md_block_start
-        self.input_options = input_options
-        self.input_digraph_id = input_digraph_id
+        # Input configuration
+        self.config = {
+            "md_block_start": "..graphviz",
+            "options": None,
+            "digraph_id": "G",
+        }
+        if config is not None:
+            self.config.update(config)
 
-        # Save expected output
-        self.expected_compressed = expected_compressed
-        self.expected_html_element = expected_html_element
-        self.expected_image_class = expected_image_class
-        self.expected_alt_text = expected_alt_text
-
-        # Configuration setting for the Pelican process
+        # Settings for the Pelican process
         self.settings = {
             "PATH": self.content_path,
             "OUTPUT_PATH": self.output_path,
@@ -73,10 +67,20 @@ class TestGraphviz(unittest.TestCase):
         if settings is not None:
             self.settings.update(settings)
 
+        # Properties of the expected output
+        self.expected = {
+            "compressed": True,
+            "html_element": "div",
+            "image_class": "graphviz",
+            "alt_text": "G",
+        }
+        if expected is not None:
+            self.expected.update(expected)
+
     def test_md(self):
         options_string = ""
-        if self.input_options:
-            kvs = ",".join(f'{k}="{v}"' for k, v in self.input_options.items())
+        if self.config["options"]:
+            kvs = ",".join(f'{k}="{v}"' for k, v in self.config["options"].items())
             options_string = f"[{kvs}]"
 
         # Create the article file
@@ -84,14 +88,13 @@ class TestGraphviz(unittest.TestCase):
             # Write header
             fid.write(f"Title: {TEST_FILE_STEM}\nDate: 1970-01-01\n")
             # Write Graphviz block
-            md_input = f"""
-{self.input_md_block_start} {options_string} dot
-digraph{f" {self.input_digraph_id}" if self.input_digraph_id else ""} {{
+            fid.write(f"""
+{self.config["md_block_start"]} {options_string} dot
+digraph{f" {self.config['digraph_id']}" if self.config["digraph_id"] else ""} {{
   graph [rankdir = LR];
   Hello -> World
 }}
-"""
-            fid.write(md_input)
+""")
 
         self.run_pelican()
         self.assert_expected_output()
@@ -109,13 +112,13 @@ digraph{f" {self.input_digraph_id}" if self.input_digraph_id else ""} {{
             # from failed asserts.
             content = fid.read()
             soup = BeautifulSoup(content, "html.parser")
-            if self.expected_compressed:
+            if self.expected["compressed"]:
                 elt = soup.find(
-                    self.expected_html_element, class_=self.expected_image_class
+                    self.expected["html_element"], class_=self.expected["image_class"]
                 )
                 assert isinstance(elt, Tag), content
 
-                img = elt.find("img", attrs={"alt": self.expected_alt_text})
+                img = elt.find("img", attrs={"alt": self.expected["alt_text"]})
                 assert img is not None, content
             else:
                 svg = soup.find("svg")
@@ -136,9 +139,10 @@ class TestGraphvizHtmlElement(TestGraphviz):
 
     def setUp(self):
         """Initialize the configuration."""
+        value = "span"
         super().setUp(
-            settings={"GRAPHVIZ_HTML_ELEMENT": "span"},
-            expected_html_element="span",
+            settings={"GRAPHVIZ_HTML_ELEMENT": value},
+            expected={"html_element": value},
         )
 
 
@@ -148,8 +152,8 @@ class TestGraphvizBlockStart(TestGraphviz):
     def setUp(self):
         """Initialize the configuration."""
         super().setUp(
+            config={"md_block_start": "==foobar"},
             settings={"GRAPHVIZ_BLOCK_START": "==foobar"},
-            input_md_block_start="==foobar",
         )
 
 
@@ -158,8 +162,9 @@ class TestGraphvizImageClass(TestGraphviz):
 
     def setUp(self):
         """Initialize the configuration."""
+        value = "foo"
         super().setUp(
-            settings={"GRAPHVIZ_IMAGE_CLASS": "foo"}, expected_image_class="foo"
+            settings={"GRAPHVIZ_IMAGE_CLASS": value}, expected={"image_class": value}
         )
 
 
@@ -168,7 +173,10 @@ class TestGraphvizImageNoCompress(TestGraphviz):
 
     def setUp(self):
         """Initialize the configuration."""
-        super().setUp(settings={"GRAPHVIZ_COMPRESS": False}, expected_compressed=False)
+        value = False
+        super().setUp(
+            settings={"GRAPHVIZ_COMPRESS": value}, expected={"compressed": value}
+        )
 
 
 class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
@@ -176,9 +184,10 @@ class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
 
     def setUp(self):
         """Initialize the configuration."""
+        value = "span"
         super().setUp(
-            input_options={"html-element": "span"},
-            expected_html_element="span",
+            config={"options": {"html-element": value}},
+            expected={"html_element": value},
         )
 
 
@@ -187,10 +196,11 @@ class TestGraphvizAltText(TestGraphviz):
 
     def setUp(self):
         """Initialize the configuration."""
+        value = "G"
         super().setUp(
-            input_digraph_id="G",
+            config={"digraph_id": value},
             settings={"GRAPHVIZ_ALT_TEXT": "foo"},
-            expected_alt_text="G",
+            expected={"alt_text": value},
         )
 
 
@@ -199,10 +209,11 @@ class TestGraphvizAltTextWithoutID(TestGraphviz):
 
     def setUp(self):
         """Initialize the configuration."""
+        value = "foo"
         super().setUp(
-            input_digraph_id=None,
-            settings={"GRAPHVIZ_ALT_TEXT": "foo"},
-            expected_alt_text="foo",
+            config={"digraph_id": None},
+            settings={"GRAPHVIZ_ALT_TEXT": value},
+            expected={"alt_text": value},
         )
 
 
@@ -213,6 +224,6 @@ class TestGraphvizAltTextViaOption(TestGraphviz):
         """Initialize the configuration."""
         text = "A wonderful graph"
         super().setUp(
-            input_options={"alt-text": text},
-            expected_alt_text=text,
+            config={"options": {"alt-text": text}},
+            expected={"alt_text": text},
         )
