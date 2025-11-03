@@ -6,7 +6,7 @@ Graphviz: A Plugin for Pelican
 [![Downloads](https://img.shields.io/pypi/dm/pelican-graphviz)](https://pypi.org/project/pelican-graphviz/)
 [![License](https://img.shields.io/pypi/l/pelican-graphviz?color=blue)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
-Graphviz is a Pelican plugin that allows the inclusion of [Graphviz][] images using the Markdown markup format. The code for the Graphviz figure is included as a block in the article’s source. In the output HTML file, the Graphviz figure can appear as either a `<svg>` or embedded into a `<img>` element using the Base64 format.
+Graphviz is a Pelican plugin that allows the inclusion of [Graphviz][] images using the Markdown or reStructuredText markup format. The code for the Graphviz figure is included as a block in the article’s source. In the output HTML file, the Graphviz figure can appear as either a `<svg>` or embedded into a `<img>` element using the Base64 format.
 
 [Graphviz]: https://www.graphviz.org
 
@@ -32,9 +32,11 @@ For macOS, Graphviz can be installed via Homebrew:
 Usage
 -----
 
-In the Markdown source, the Graphviz code must be inserted as an individual block (i.e., separated from the rest of the material by blank lines), like the following:
+### Markdown
 
-```markdwon
+In Markdown source, the Graphviz code must be inserted as an individual block (i.e., separated from the rest of the material by blank lines), like the following:
+
+```markdown
 ..graphviz dot
 digraph G {
   graph [rankdir = LR];
@@ -50,6 +52,19 @@ The block must start with `..graphviz` (this is configurable — see below). The
 
 [Graphviz documentation]: https://www.graphviz.org/documentation/
 
+### reStructuredText
+
+For RST input, support is implemented as a directive, with syntax like:
+
+```rst
+.. graphviz:: dot
+   :alt-text: My graph
+
+   digraph G {
+     graph [rankdir = LR];
+     Hello -> World
+   }
+```
 
 Styling with CSS
 ----------------
@@ -83,20 +98,29 @@ The following variables can be set in the Pelican settings file:
 
 - `GRAPHVIZ_IMAGE_CLASS`: Class of the `<div>` element including the generated Graphviz image (defaults to `'graphviz'`).
 
-- `GRAPHVIZ_BLOCK_START`: Starting tag for the Graphviz block in Markdown (defaults to `'..graphviz'`).
+- `GRAPHVIZ_BLOCK_START`: Starting tag for the Graphviz block in Markdown (defaults to `'..graphviz'`).  This setting has no effect for reStructuredText input.
 
 - `GRAPHVIZ_COMPRESS`: Compress the resulting SVG XML to an image (defaults to `True`). Without compression, more SVG features are available, for instance including clickable URLs inside the Graphviz diagram.
 
 - `GRAPHVIZ_ALT_TEXT`: String that will be used as the default value for the `alt` property of the generated `<img>` HTML element (defaults to `"[GRAPH]"`). It is only meaningful when the reuslting SVG output is compressed.
 
-The values above can be overridden for each individual block using the syntax below:
+The values above can be overridden for each individual block using the syntax below. In Markdown, this looks like:
 
-```markdwon
+```markdown
 ..graphviz [key1=val1, key2="val2"...] dot
 ```
-The allowed keys are `html-element`, `image-class`, `block-start`, `alt-text`, and `compress`. For the latter, the value can be either `yes` or `no`.
 
 If the value needs to include a comma (`,`) or an equal sign (`=`), then use the `key2="val2"` form.
+
+Or in reStructuredText:
+
+```rst
+.. graphviz:: dot
+   :key1: val1
+   :key2: val2
+```
+
+The allowed keys are `html-element`, `image-class`, `block-start`, `alt-text`, and `compress`. For the latter, the value can be either `yes` or `no`.  `block-start` has no effect for reStructuredText.
 
 
 Output Image Format
@@ -128,14 +152,6 @@ An alternative to this plugin is the [Graphviz tag][] provided by the [Liquid Ta
 
 [Graphviz tag]: https://github.com/pelican-plugins/liquid-tags/blob/main/pelican/plugins/liquid_tags/graphviz.py
 [Liquid Tags plugin]: https://github.com/pelican-plugins/liquid-tags
-
-
-To-Do
------
-
-Contributions that make this plugin work with [reStructuredText][] content are welcome.
-
-[reStructuredText]: https://docutils.sourceforge.io/rst.html
 
 
 Contributing
