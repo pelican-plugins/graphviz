@@ -176,7 +176,6 @@ class TestGraphvizBlockStart(TestGraphviz):
     Because the reStructredText implementation does not allow configuring the
     directive name using GRAPHVIZ_BLOCK_START, test_rst() is essentially a
     no-op for this test case.
-
     """
 
     def setUp(self):
