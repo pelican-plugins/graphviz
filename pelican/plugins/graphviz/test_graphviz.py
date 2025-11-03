@@ -77,11 +77,16 @@ class TestGraphviz(unittest.TestCase):
     def test_md(self):
         options_string = ""
         if self.config["options"]:
-            kvs = ",".join(f'{k}="{v}"' for k, v in self.config["options"].items())
+            kvs = ",".join(
+                f'{k}="{v}"' for k, v in self.config["options"].items()
+            )
             options_string = f"[{kvs}]"
 
         # Create the article file
-        with open(os.path.join(self.content_path, f"{TEST_FILE_STEM}.md"), "w") as fid:
+        with open(
+                os.path.join(self.content_path, f"{TEST_FILE_STEM}.md"),
+                "w"
+        ) as fid:
             # Write header
             fid.write(f"Title: {TEST_FILE_STEM}\nDate: 1970-01-01\n")
             # Write Graphviz block
@@ -103,7 +108,10 @@ digraph{f" {self.config['digraph_id']}" if self.config["digraph_id"] else ""} {{
                 f"   :{k}: {v}" for k, v in self.config["options"].items()
             )
 
-        with open(os.path.join(self.content_path, f"{TEST_FILE_STEM}.rst"), "w") as fid:
+        with open(
+                os.path.join(self.content_path, f"{TEST_FILE_STEM}.rst"),
+                "w"
+        ) as fid:
             rst_input = f"""\
 {TEST_FILE_STEM}
 ################
@@ -131,14 +139,17 @@ digraph{f" {self.config['digraph_id']}" if self.config["digraph_id"] else ""} {{
     def assert_expected_output(self):
         """Test for default values of the configuration variables."""
         # Open the output HTML file
-        with open(os.path.join(self.output_path, f"{TEST_FILE_STEM}.html")) as fid:
+        with open(
+                os.path.join(self.output_path, f"{TEST_FILE_STEM}.html")
+        ) as fid:
             # Keep content as a string so we can see full content in output
             # from failed asserts.
             content = fid.read()
             soup = BeautifulSoup(content, "html.parser")
             if self.expected["compressed"]:
                 elt = soup.find(
-                    self.expected["html_element"], class_=self.expected["image_class"]
+                    self.expected["html_element"],
+                    class_=self.expected["image_class"],
                 )
                 assert isinstance(elt, Tag), content
 
@@ -194,7 +205,8 @@ class TestGraphvizImageClass(TestGraphviz):
         """Initialize the configuration."""
         value = "foo"
         super().setUp(
-            settings={"GRAPHVIZ_IMAGE_CLASS": value}, expected={"image_class": value}
+            settings={"GRAPHVIZ_IMAGE_CLASS": value},
+            expected={"image_class": value},
         )
 
 
@@ -205,7 +217,8 @@ class TestGraphvizImageNoCompress(TestGraphviz):
         """Initialize the configuration."""
         value = False
         super().setUp(
-            settings={"GRAPHVIZ_COMPRESS": value}, expected={"compressed": value}
+            settings={"GRAPHVIZ_COMPRESS": value},
+            expected={"compressed": value},
         )
 
 

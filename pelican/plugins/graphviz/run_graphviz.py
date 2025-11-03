@@ -72,7 +72,9 @@ def append_base64_img(svg: bytes, config: dict, elt: ET.Element):
     img = ET.SubElement(elt, "img")
     img.set(
         "src",
-        "data:image/svg+xml;base64,{}".format(base64.b64encode(svg).decode("ascii")),
+        "data:image/svg+xml;base64,{}".format(
+            base64.b64encode(svg).decode("ascii")
+        ),
     )
     # Set the alt text. Order of priority:
     #    1. Block option alt-text
