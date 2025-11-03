@@ -29,8 +29,9 @@ from .run_graphviz import append_base64_img, run_graphviz
 def truthy(argument: str) -> bool:
     """Parse a "truthy" RST option.
 
-    Applies permissive conventions to interpret to interpret "truthy"-looking
-    strings as True, or False otherwise.
+    Applies permissive conventions to interpret "truthy"-looking strings as
+    True, or False otherwise.
+
     """
     return argument.lower() in ("yes", "true", "on", "1")
 
