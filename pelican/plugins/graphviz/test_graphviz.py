@@ -213,6 +213,40 @@ class TestGraphvizImageNoCompress(TestGraphviz):
         )
 
 
+class TestGraphvizImageCompressOptionNo(TestGraphviz):
+    """Class for exercising the compress option set to "no".
+
+    Ensures that a "no" compress option is parsed as False and overrides the
+    setting.
+
+    """
+
+    def setUp(self):
+        """Initialize the configuration."""
+        super().setUp(
+            config={"options": {"compress": "no"}},
+            settings={"GRAPHVIZ_COMPRESS": True},
+            expected={"compressed": False},
+        )
+
+
+class TestGraphvizImageCompressOptionYes(TestGraphviz):
+    """Class for exercising the compress option set to "yes".
+
+    Ensures that a "yes" compress option is parsed as True and overrides the
+    setting.
+
+    """
+
+    def setUp(self):
+        """Initialize the configuration."""
+        super().setUp(
+            config={"options": {"compress": "yes"}},
+            settings={"GRAPHVIZ_COMPRESS": False},
+            expected={"compressed": True},
+        )
+
+
 class TestGraphvizLocallyOverrideConfiguration(TestGraphviz):
     """Class for exercising the override of a configuration variable."""
 
