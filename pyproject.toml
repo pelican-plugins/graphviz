@@ -15,16 +15,16 @@ classifiers = [
     "License :: OSI Approved :: GNU Affero General Public License v3",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10"
 dependencies = [
     "pelican>=4.5",
     "py3dns>=3.2",
@@ -42,7 +42,7 @@ markdown = ["markdown>=3.4"]
 [dependency-groups]
 lint = [
     "invoke>=2.2",
-    "ruff>=0.9.1,<1.0.0",
+    "ruff>=0.14.2,<1.0.0",
 ]
 test = [
     "beautifulsoup4>=4.13",
@@ -60,7 +60,7 @@ source-includes = [
     "hello-world.png",
 ]
 includes = ["pelican/"]
-excludes = ["tasks.py"]
+excludes = ["**/.DS_Store"]
 
 [tool.autopub]
 project-name = "Graphviz"
