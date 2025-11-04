@@ -80,16 +80,20 @@ class TestGraphviz(unittest.TestCase):
     def test_md(self):
         options_string = ""
         if self.config["options"]:
+            # fmt: off
             kvs = ",".join(
                 f'{k}="{v}"' for k, v in self.config["options"].items()
             )
+            # fmt: on
             options_string = f"[{kvs}]"
 
         # Create the article file
+        # fmt: off
         with open(
                 os.path.join(self.content_path, f"{TEST_FILE_STEM}.md"),
                 "w"
         ) as fid:
+            # fmt: on
             # Write header
             fid.write(f"Title: {TEST_FILE_STEM}\nDate: 1970-01-01\n")
             # Write Graphviz block
@@ -113,10 +117,12 @@ digraph{f" {self.config['digraph_id']}" if self.config["digraph_id"] else ""} {{
                 f"   :{k}: {v}" for k, v in self.config["options"].items()
             )
 
+        # fmt: off
         with open(
                 os.path.join(self.content_path, f"{TEST_FILE_STEM}.rst"),
                 "w"
         ) as fid:
+            # fmt: on
             rst_input = f"""\
 {TEST_FILE_STEM}
 ################
@@ -144,9 +150,11 @@ digraph{f" {self.config['digraph_id']}" if self.config["digraph_id"] else ""} {{
     def assert_expected_output(self):
         """Test for default values of the configuration variables."""
         # Open the output HTML file
+        # fmt: off
         with open(
                 os.path.join(self.output_path, f"{TEST_FILE_STEM}.html")
         ) as fid:
+            # fmt: on
             # Keep content as a string so we can see full content in output
             # from failed asserts.
             content = fid.read()
