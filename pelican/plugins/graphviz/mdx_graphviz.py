@@ -68,7 +68,7 @@ class GraphvizProcessor(BlockProcessor):
         else:
             return
 
-        output = run_graphviz(program, code, format="svg")
+        output = run_graphviz(program, code, image_format="svg")
 
         # Set HTML element
         elt = ET.SubElement(parent, config["html-element"])

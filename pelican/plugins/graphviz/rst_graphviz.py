@@ -69,7 +69,7 @@ def make_graphviz_directive(base_config: dict):
             program = self.arguments[0]
             code = "\n".join(self.content)
 
-            output = run_graphviz(program, code, format="svg")
+            output = run_graphviz(program, code, image_format="svg")
 
             elt = ET.Element(config["html-element"])
             elt.set("class", config["image-class"])

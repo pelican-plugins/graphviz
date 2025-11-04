@@ -96,12 +96,12 @@ def append_base64_img(svg: bytes, config: dict, elt: ET.Element):
             img.set("alt", config["alt-text-default"])
 
 
-def run_graphviz(program, code, options=None, format="png"):
+def run_graphviz(program, code, options=None, image_format="png"):
     """Run graphviz program and returns image data."""
     if not options:
         options = []
 
-    dot_command = [program, *options, "-T", format]
+    dot_command = [program, *options, "-T", image_format]
 
     if os.name == "nt":
         # Avoid opening shell window.
