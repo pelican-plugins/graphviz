@@ -93,13 +93,15 @@ class TestGraphviz(unittest.TestCase):
             # Write header
             fid.write(f"Title: {TEST_FILE_STEM}\nDate: 1970-01-01\n")
             # Write Graphviz block
-            fid.write(f"""
+            fid.write(
+                f"""
 {self.config["md_block_start"]} {options_string} dot
 digraph{f" {self.config['digraph_id']}" if self.config["digraph_id"] else ""} {{
   graph [rankdir = LR];
   Hello -> World
 }}
-""")
+"""
+            )
 
         self.run_pelican()
         self.assert_expected_output()
