@@ -39,9 +39,9 @@ class TestGraphviz(unittest.TestCase):
 
     def setUp(
         self,
-        config={},
-        settings={},
-        expected={},
+        config=None,
+        settings=None,
+        expected=None,
     ):
         """Set up the test environment."""
         # Set the paths for the input (content) and output (html) files
@@ -54,7 +54,8 @@ class TestGraphviz(unittest.TestCase):
             "options": None,
             "digraph_id": "G",
         }
-        self.config.update(config)
+        if config is not None:
+            self.config.update(config)
 
         # Settings for the Pelican process
         self.settings = {
@@ -63,7 +64,8 @@ class TestGraphviz(unittest.TestCase):
             "PLUGINS": [graphviz],
             "CACHE_CONTENT": False,
         }
-        self.settings.update(settings)
+        if settings is not None:
+            self.settings.update(settings)
 
         # Properties of the expected output
         self.expected = {
@@ -72,7 +74,8 @@ class TestGraphviz(unittest.TestCase):
             "image_class": "graphviz",
             "alt_text": "G",
         }
-        self.expected.update(expected)
+        if expected is not None:
+            self.expected.update(expected)
 
     def test_md(self):
         options_string = ""
