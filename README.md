@@ -48,7 +48,7 @@ This will insert an image into your article, as shown here:
 
 ![figure](https://github.com/pelican-plugins/graphviz/raw/main/hello-world.png)
 
-The block must start with `..graphviz` (this is configurable — see below). The word `dot` in the first line indicates which program will be used to produce the image. The available programs are: `dot`, `neato`, `twopi`, `circo`, `fdp`, `sfdp`, and `patchwork` (see the [Graphviz documentation][] for details). The Graphviz code must start on the second line of the block. Please note that *newlines are not allowed inside the Graphviz block*.
+The block must start with `..graphviz` (this is configurable — see below). The word `dot` in the first line indicates which program will be used to produce the image. The available programs are: `dot`, `neato`, `twopi`, `circo`, `fdp`, `sfdp`, and `patchwork` (see the [Graphviz documentation][] for details). The Graphviz code must start on the second line of the block. Please note that *empty lines are not allowed inside the Graphviz block*.
 
 [Graphviz documentation]: https://www.graphviz.org/documentation/
 
