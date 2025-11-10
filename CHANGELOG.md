@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+2.0.1 - 2025-11-10
+------------------
+
+This is a maintenance release. A mistake in the README.md documentation file regarding the presence of empty lines in the Graphviz block (Markdown format).
+
 2.0.0 - 2025-11-04
 ------------------
 
